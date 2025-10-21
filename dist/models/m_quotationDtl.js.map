@@ -1,0 +1,1 @@
+{"version":3,"file":"m_quotationDtl.js","sourceRoot":"","sources":["../../src/models/m_quotationDtl.ts"],"names":[],"mappings":";;;;;;AAAA,wDAA6B;AA2HhB,QAAA,iBAAiB,GAAG;IAC7B,KAAK,CAAC,kBAAkB,CAAC,aAAqB;QAC1C,MAAM,YAAY,GAAG,MAAM,IAAA,eAAE,EAAe,4BAA4B,CAAC;aACpE,KAAK,CAAC,eAAe,EAAE,aAAa,CAAC;aACrC,MAAM,CAAC,GAAG,CAAC,CAAC;QACjB,OAAO,YAAY,CAAC;IACxB,CAAC;CACJ,CAAC"}

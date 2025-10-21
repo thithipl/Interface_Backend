@@ -1,0 +1,1 @@
+{"version":3,"file":"m_VW_inquiryItem.js","sourceRoot":"","sources":["../../src/models/m_VW_inquiryItem.ts"],"names":[],"mappings":";;;;;;AAAA,wDAA6B;AAahB,QAAA,gBAAgB,GAAG;IAC5B,KAAK,CAAC,uBAAuB,CAAC,OAAe;QACzC,MAAM,MAAM,GAAG,MAAM,IAAA,eAAE,EAAc,wCAAwC,CAAC;aACzE,KAAK,CAAC,cAAc,EAAE,OAAO,CAAC;aAC9B,MAAM,CAAC,GAAG,CAAC,CAAC;QACjB,OAAO,MAAM,CAAC;IAClB,CAAC;CACJ,CAAA"}

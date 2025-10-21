@@ -7,6 +7,7 @@ import inquiryPFMNoRoutes from "./routes/VW_inquiryPFMNo_routes";
 import proformaDataRoutes from "./routes/VW_proformaData_routes";
 import inquiryDataRoutes from "./routes/VW_inquiryData_routes";
 import inquiryItemRoutes from "./routes/VW_inquiryItem_routes";
+import OnlyIqrRoutes from "./routes/VW_onlyiqr.routes";
 
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(`${API_PREFIX}/inquiryPFMNo`, inquiryPFMNoRoutes);
 app.use(`${API_PREFIX}/proformaData`, proformaDataRoutes);
 app.use(`${API_PREFIX}/inquiryData`, inquiryDataRoutes);
 app.use(`${API_PREFIX}/inquiryItem`, inquiryItemRoutes);
+app.use(`${API_PREFIX}/onlyIqr`, OnlyIqrRoutes);
 
 
 app.use("/test", (req, res) => {

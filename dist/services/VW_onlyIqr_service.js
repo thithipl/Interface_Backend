@@ -8,4 +8,4 @@ class OnlyIqrService {
     }
 }
 exports.OnlyIqrService = OnlyIqrService;
-//# sourceMappingURL=VW_onlyIqr_service.js.map
+//# sourceMappingURL=VW_onlyiqr_service.js.map

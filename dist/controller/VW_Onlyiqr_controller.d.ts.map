@@ -1,1 +1,1 @@
-{"version":3,"file":"VW_Onlyiqr_controller.d.ts","sourceRoot":"","sources":["../../src/controller/VW_Onlyiqr_controller.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,QAAQ,EAAE,MAAM,SAAS,CAAC;AAKjD,eAAO,MAAM,iBAAiB;gBAER,OAAO,OAAO,QAAQ,GAAG,OAAO,CAAC,IAAI,CAAC;CAQ3D,CAAA"}
+{"version":3,"file":"VW_onlyiqr_controller.d.ts","sourceRoot":"","sources":["../../src/controller/VW_onlyiqr_controller.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,QAAQ,EAAE,MAAM,SAAS,CAAC;AAKjD,eAAO,MAAM,iBAAiB;gBAER,OAAO,OAAO,QAAQ,GAAG,OAAO,CAAC,IAAI,CAAC;CAQ3D,CAAA"}

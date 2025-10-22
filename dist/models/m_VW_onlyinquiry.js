@@ -8,7 +8,7 @@ const index_1 = __importDefault(require("../db/index"));
 exports.OnlyInquiryModel = {
     async getINQAll() {
         const rows = await (0, index_1.default)('Autoshop.dbo.VW_AS_getDataInquiry')
-            .select('id', 'inquiry_code', 'company_contact_id', 'company_code', 'CustomerCode', 'est_date', 'created_by', 'is_active', 'created_at', 'updated_by', 'updated_at')
+            .select('id', 'inquiry_code')
             .orderBy('inquiry_code', 'desc');
         return rows;
     },

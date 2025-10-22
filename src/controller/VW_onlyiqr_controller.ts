@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { OnlyIqrService } from "../services/VW_onlyIqr_service";
+import { OnlyIqrService } from "../services/VW_onlyiqr_service";
 
 const service = new OnlyIqrService();
 

@@ -9,6 +9,7 @@ exports.InquiryItemModel = {
     async getINQItemDataByINQCode(inqcode) {
         const result = await (0, index_1.default)('Autoshop.dbo.VW_AS_getDataInquiryItems')
             .where("inquiry_code", inqcode)
+            .orderBy("id")
             .select("*");
         return result;
     }

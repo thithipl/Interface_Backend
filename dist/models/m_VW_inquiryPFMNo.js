@@ -8,6 +8,7 @@ const index_1 = __importDefault(require("../db/index"));
 exports.InquiryCodePFMNoModel = {
     async getAll() {
         return (0, index_1.default)('Autoshop.dbo.VW_AS_getDataInquiryCodePFMNo')
+            .orderBy('id', 'desc')
             .select('*');
     },
     async getByPFMNo(pfmNo) {

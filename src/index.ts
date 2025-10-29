@@ -8,6 +8,9 @@ import proformaDataRoutes from "./routes/VW_proformaData_routes";
 import inquiryDataRoutes from "./routes/VW_inquiryData_routes";
 import inquiryItemRoutes from "./routes/VW_inquiryItem_routes";
 import OnlyIqrRoutes from "./routes/VW_onlyiqr.routes";
+import inquiryReqRoutes from "./routes/VW_inquiryReq_routes";
+import inquiryAddRoutes from "./routes/VW_inquiryAdd_routes";
+import updatePFMRoutes from "./routes/AS_updateDataPFM_Inquiry";
 
 
 dotenv.config();
@@ -25,6 +28,9 @@ app.use(`${API_PREFIX}/proformaData`, proformaDataRoutes);
 app.use(`${API_PREFIX}/inquiryData`, inquiryDataRoutes);
 app.use(`${API_PREFIX}/inquiryItem`, inquiryItemRoutes);
 app.use(`${API_PREFIX}/onlyIqr`, OnlyIqrRoutes);
+app.use(`${API_PREFIX}/inquiryReq`, inquiryReqRoutes);
+app.use(`${API_PREFIX}/inquiryAdd`, inquiryAddRoutes);
+app.use(`${API_PREFIX}/updatePFM`, updatePFMRoutes);
 
 
 app.use("/test", (req, res) => {

@@ -15,6 +15,7 @@ export const InquiryItemModel = {
     async getINQItemDataByINQCode(inqcode: string): Promise<InquiryItem[]> {
         const result = await db<InquiryItem>('Autoshop.dbo.VW_AS_getDataInquiryItems')
             .where("inquiry_code", inqcode)
+            .orderBy("id")
             .select("*");
         return result;
     }

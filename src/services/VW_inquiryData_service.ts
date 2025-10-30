@@ -1,5 +1,5 @@
-import type { InquiryData } from "../models/m_VW_inquiryData";
-import { InquiryDataModel, InquiryAllModel } from "../models/m_VW_inquiryData";
+import type { InquiryData } from "../models/m_VW_getinquiry/m_VW_inquiryData";
+import { InquiryDataModel, InquiryAllModel } from "../models/m_VW_getinquiry/m_VW_inquiryData";
 
 export class InquiryDataService {
     async getAll(): Promise<InquiryData[]> {

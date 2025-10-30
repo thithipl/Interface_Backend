@@ -1,1 +1,1 @@
-{"version":3,"file":"VW_inquiryAdd_service.d.ts","sourceRoot":"","sources":["../../src/services/VW_inquiryAdd_service.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,UAAU,EAAE,MAAM,2BAA2B,CAAC;AAG5D,qBAAa,iBAAiB;IACpB,SAAS,CAAC,OAAO,EAAE,MAAM,GAAG,OAAO,CAAC,UAAU,EAAE,CAAC;CAG1D"}
+{"version":3,"file":"VW_inquiryAdd_service.d.ts","sourceRoot":"","sources":["../../src/services/VW_inquiryAdd_service.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,UAAU,EAAE,MAAM,2CAA2C,CAAC;AAG5E,qBAAa,iBAAiB;IACpB,SAAS,CAAC,OAAO,EAAE,MAAM,GAAG,OAAO,CAAC,UAAU,EAAE,CAAC;CAG1D"}

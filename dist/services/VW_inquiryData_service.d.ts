@@ -1,4 +1,4 @@
-import type { InquiryData } from "../models/m_VW_inquiryData";
+import type { InquiryData } from "../models/m_VW_getinquiry/m_VW_inquiryData";
 export declare class InquiryDataService {
     getAll(): Promise<InquiryData[]>;
     getByINQCode(inqcode: string): Promise<InquiryData[]>;

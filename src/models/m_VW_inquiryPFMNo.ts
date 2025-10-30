@@ -1,5 +1,5 @@
 import db from "../db/index";
-export interface InquiryCodePFMNo {
+export interface DataInquiryCodePFMNo {
     id: number;
     inquiry_code: string;
     company_contact_id: number | null;
@@ -32,25 +32,11 @@ export interface InquiryCodePFMNo {
     CustomerName: string | null;
 }
 
-export const InquiryCodePFMNoModel = {
-    async getAll(): Promise<InquiryCodePFMNo[]> {
-        return db<InquiryCodePFMNo>('Autoshop.dbo.VW_AS_getDataInquiryCodePFMNo')
+export const LoadDataInquiryPFMNoModel = {
+    async getDataAllInquiryPFMNo(): Promise<DataInquiryCodePFMNo[]> {
+        const result = await db<DataInquiryCodePFMNo>('Autoshop.dbo.VW_AS_getDataInquiryPFMNo')
             .orderBy('id', 'desc')
             .select('*');
-    },
-
-    async getByPFMNo(pfmNo: string): Promise<InquiryCodePFMNo[]> {
-        const result = await db<InquiryCodePFMNo>('Autoshop.dbo.VW_AS_getDataInquiryCodePFMNo')
-            .where("PFM_No", pfmNo)
-            .select("*");
         return result;
-    }
-}
-
-export const LoadInquiryPFMNoModel = {
-    async getAllInquiryPFMNo(): Promise<InquiryCodePFMNo[]> {
-        return db<InquiryCodePFMNo>('Autoshop.dbo.VW_AS_getDataInquiryCodePFMNo')
-            .orderBy('id', 'desc')
-            .select('*');
     },
 }

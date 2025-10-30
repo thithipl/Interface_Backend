@@ -1,4 +1,4 @@
-export interface InquiryCodePFMNo {
+export interface DataInquiryCodePFMNo {
     id: number;
     inquiry_code: string;
     company_contact_id: number | null;
@@ -30,8 +30,7 @@ export interface InquiryCodePFMNo {
     CustomerCode: string | null;
     CustomerName: string | null;
 }
-export declare const InquiryCodePFMNoModel: {
-    getAll(): Promise<InquiryCodePFMNo[]>;
-    getByPFMNo(pfmNo: string): Promise<InquiryCodePFMNo[]>;
+export declare const LoadDataInquiryPFMNoModel: {
+    getDataAllInquiryPFMNo(): Promise<DataInquiryCodePFMNo[]>;
 };
 //# sourceMappingURL=m_VW_inquiryPFMNo.d.ts.map

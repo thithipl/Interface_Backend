@@ -1,6 +1,5 @@
-import type { InquiryCodePFMNo } from "../models/m_VW_inquiryPFMNo";
+import type { DataInquiryCodePFMNo } from "../models/m_VW_inquiryPFMNo";
 export declare class InquiryCodePFMNoService {
-    getAll(): Promise<InquiryCodePFMNo[]>;
-    getByPFMNo(pfmNo: string): Promise<InquiryCodePFMNo[]>;
+    LoadInquiryPFMNo(): Promise<DataInquiryCodePFMNo[]>;
 }
 //# sourceMappingURL=VW_inquiryPFMNo_service.d.ts.map

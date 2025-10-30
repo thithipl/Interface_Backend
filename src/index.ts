@@ -11,7 +11,7 @@ import OnlyIqrRoutes from "./routes/VW_onlyiqr.routes";
 import inquiryReqRoutes from "./routes/VW_inquiryReq_routes";
 import inquiryAddRoutes from "./routes/VW_inquiryAdd_routes";
 import updatePFMRoutes from "./routes/AS_updateDataPFM_Inquiry";
-
+import inquiryDtlByPFMNoRoutes from "./routes/VW_inquiryDtlByPFMNo_routes";
 
 dotenv.config();
 const app = express();
@@ -31,6 +31,7 @@ app.use(`${API_PREFIX}/onlyIqr`, OnlyIqrRoutes);
 app.use(`${API_PREFIX}/inquiryReq`, inquiryReqRoutes);
 app.use(`${API_PREFIX}/inquiryAdd`, inquiryAddRoutes);
 app.use(`${API_PREFIX}/updatePFM`, updatePFMRoutes);
+app.use(`${API_PREFIX}/inquiryDtlByPFMNo`, inquiryDtlByPFMNoRoutes);
 
 
 app.use("/test", (req, res) => {

@@ -4,22 +4,12 @@ import { InquiryCodePFMNoService } from "../services/VW_inquiryPFMNo_service";
 const service = new InquiryCodePFMNoService();
 
 export const InquiryPFMNoController = {
-    async getAll(req: Request, res: Response): Promise<void> {
+    async getLoadInquiryPFMNo(req: Request, res: Response): Promise<void> {
         try {
-            const data = await service.getAll();
+            const data = await service.LoadInquiryPFMNo();
             res.status(200).json(data);
         } catch (error) {
             res.status(500).json({ message: "Internal server error", error });
         }
     },
-
-    async getByPFMNo(req: Request, res: Response): Promise<void> {
-        const { pfmNo } = req.params;
-        try {
-            const data = await service.getByPFMNo(pfmNo || "");
-            res.status(200).json(data);
-        } catch (error) {
-            res.status(500).json({ message: "Internal server error", error });
-        }
-    }
 };

@@ -1,0 +1,65 @@
+{
+	"API": [
+		{
+			"API_Name": "Brand",
+			"APITYPE": "POST",
+			"URL": "https://www.fortuneparts.net",
+			"APIValue": "/api/brand"
+		},
+		{
+			"API_Name": "Product Item",
+			"APITYPE": "POST",
+			"URL": "https://www.fortuneparts.net",
+			"APIValue": "/api/product/item"
+		},
+		{
+			"API_Name": "Product Item Price_zone",
+			"APITYPE": "POST",
+			"URL": "https://www.fortuneparts.net",
+			"APIValue": "/api/product/item/price-zone"
+		},
+		{
+			"API_Name": "Proforma",
+			"APITYPE": "POST",
+			"URL": "https://www.fortuneparts.net",
+			"APIValue": "/api/proforma/update"
+		},
+		{
+			"API_Name": "Invoice",
+			"APITYPE": "POST",
+			"URL": "https://www.fortuneparts.net",
+			"APIValue": "/api/invoice/update"
+		},
+		{
+			"API_Name": "Zone",
+			"APITYPE": "POST",
+			"URL": "https://www.fortuneparts.net",
+			"APIValue": "/api/zone"
+		},
+		{
+			"API_Name": "Issueyar",
+			"APITYPE": "POST",
+			"URL": "https://www.fortuneparts.net",
+			"APIValue": "/api/issueyear"
+		},
+		{
+			"API_Name": "PaymentReceive",
+			"APITYPE": "POST",
+			"URL": "https://www.fortuneparts.net",
+			"APIValue": "/api/paymentreceive/update"
+		},
+		{
+			"API_Name": "update-status",
+			"APITYPE": "POST",
+			"URL": "https://www.fortuneparts.net",
+			"APIValue": "/api/shipmentstatus/update-status"
+		},
+		{
+			"API_Name": "claim/update",
+			"APITYPE": "POST",
+			"URL": "https://www.fortuneparts.net",
+			"APIValue": "/api/claim/update"
+		}
+    ] 
+}
+        

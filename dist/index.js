@@ -18,6 +18,7 @@ const VW_inquiryAdd_routes_1 = __importDefault(require("./routes/VW_inquiryAdd_r
 const AS_updateDataPFM_Inquiry_1 = __importDefault(require("./routes/AS_updateDataPFM_Inquiry"));
 const VW_inquiryDtlByPFMNo_routes_1 = __importDefault(require("./routes/VW_inquiryDtlByPFMNo_routes"));
 const VW_proformaHdr_routes_1 = __importDefault(require("./routes/VW_proformaHdr_routes"));
+const VW_proformaDtl_routes_1 = __importDefault(require("./routes/VW_proformaDtl_routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(cors());
@@ -36,6 +37,7 @@ app.use(`${API_PREFIX}/inquiryAdd`, VW_inquiryAdd_routes_1.default);
 app.use(`${API_PREFIX}/updatePFM`, AS_updateDataPFM_Inquiry_1.default);
 app.use(`${API_PREFIX}/inquiryDtlByPFMNo`, VW_inquiryDtlByPFMNo_routes_1.default);
 app.use(`${API_PREFIX}/proformaHdr`, VW_proformaHdr_routes_1.default);
+app.use(`${API_PREFIX}/proformaDtl`, VW_proformaDtl_routes_1.default);
 app.use("/test", (req, res) => {
     console.log("Test route is working");
     res.send(`Test route is working`);

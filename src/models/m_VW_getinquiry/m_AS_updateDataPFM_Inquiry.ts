@@ -1,4 +1,4 @@
-import db from ".../db/index";
+import db from "../../db/index";
 
 export interface UpdatePFMResult {
   success: boolean;

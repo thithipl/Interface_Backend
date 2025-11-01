@@ -13,6 +13,7 @@ import inquiryAddRoutes from "./routes/VW_inquiryAdd_routes";
 import updatePFMRoutes from "./routes/AS_updateDataPFM_Inquiry";
 import inquiryDtlByPFMNoRoutes from "./routes/VW_inquiryDtlByPFMNo_routes";
 import proformaHdrRoutes from "./routes/VW_proformaHdr_routes";
+import proformaDtlRoutes from "./routes/VW_proformaDtl_routes";
 
 dotenv.config();
 const app = express();
@@ -34,6 +35,7 @@ app.use(`${API_PREFIX}/inquiryAdd`, inquiryAddRoutes);
 app.use(`${API_PREFIX}/updatePFM`, updatePFMRoutes);
 app.use(`${API_PREFIX}/inquiryDtlByPFMNo`, inquiryDtlByPFMNoRoutes);
 app.use(`${API_PREFIX}/proformaHdr`, proformaHdrRoutes);
+app.use(`${API_PREFIX}/proformaDtl`, proformaDtlRoutes);
 
 
 app.use("/test", (req, res) => {

@@ -1,0 +1,1 @@
+{"version":3,"file":"m_VW_proformaDtl.js","sourceRoot":"","sources":["../../src/models/m_VW_proformaDtl.ts"],"names":[],"mappings":";;;;;;AAAA,wDAA6B;AA0BhB,QAAA,gBAAgB,GAAG;IAC5B,KAAK,CAAC,cAAc,CAAC,QAAgB;QACjC,MAAM,MAAM,GAAG,MAAM,IAAA,eAAE,EAAc,mCAAmC,CAAC;aACpE,KAAK,CAAC,eAAe,EAAE,QAAQ,CAAC;aAChC,MAAM,CAAC,GAAG,CAAC,CAAC;QACjB,OAAO,MAAM,CAAC;IAClB,CAAC;CACJ,CAAA"}

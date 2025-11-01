@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InquiryAllModel = exports.InquiryDataModel = void 0;
-const index_1 = __importDefault(require("../db/index"));
+const index_1 = __importDefault(require("../../db/index"));
 exports.InquiryDataModel = {
     async getINQData() {
         return (0, index_1.default)('Autoshop.dbo.VW_AS_getDataInquiry')

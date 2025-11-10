@@ -14,6 +14,8 @@ import updatePFMRoutes from "./routes/AS_updateDataPFM_Inquiry";
 import inquiryDtlByPFMNoRoutes from "./routes/VW_inquiryDtlByPFMNo_routes";
 import proformaHdrRoutes from "./routes/VW_proformaHdr_routes";
 import proformaDtlRoutes from "./routes/VW_proformaDtl_routes";
+import invoiceRoutes from "./routes/invoice_routes";
+import tokenRoutes from "./routes/token_routes";
 
 dotenv.config();
 const app = express();
@@ -23,6 +25,7 @@ const API_PREFIX = process.env.API_PREFIX || "/api";
 const PORT = process.env.PORT || 3030;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(`${API_PREFIX}/quotations`, quotationRoutes);
 app.use(`${API_PREFIX}/quotationDtl`, quotationDtlRoutes);
 app.use(`${API_PREFIX}/inquiryPFMNo`, inquiryPFMNoRoutes);
@@ -36,6 +39,9 @@ app.use(`${API_PREFIX}/updatePFM`, updatePFMRoutes);
 app.use(`${API_PREFIX}/inquiryDtlByPFMNo`, inquiryDtlByPFMNoRoutes);
 app.use(`${API_PREFIX}/proformaHdr`, proformaHdrRoutes);
 app.use(`${API_PREFIX}/proformaDtl`, proformaDtlRoutes);
+app.use(`${API_PREFIX}/invoice`, invoiceRoutes);
+app.use(`${API_PREFIX}/login`, tokenRoutes);
+
 
 
 app.use("/test", (req, res) => {

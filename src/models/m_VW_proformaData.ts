@@ -60,6 +60,7 @@ export const ProformaDataModel = {
     async getByPFMNo(pfmNo: string): Promise<ProformaData[]> {
         const result = await db<ProformaData>('Autoshop.dbo.VW_AS_getProforma')
             .where("proforma_Code", pfmNo)
+            .orderBy("ItemOrder", "asc")
             .select("*");
         return result;
     }

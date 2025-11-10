@@ -1,0 +1,1 @@
+{"version":3,"file":"m_gettoken.d.ts","sourceRoot":"","sources":["../../src/models/m_gettoken.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,KAAK;IAClB,KAAK,EAAE,MAAM,CAAC;IACd,QAAQ,EAAE,MAAM,CAAC;CACpB;AAED,MAAM,WAAW,aAAa;IAC1B,KAAK,EAAE,MAAM,CAAC;CACjB"}

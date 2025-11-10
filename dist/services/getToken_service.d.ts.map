@@ -1,0 +1,1 @@
+{"version":3,"file":"getToken_service.d.ts","sourceRoot":"","sources":["../../src/services/getToken_service.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,KAAK,EAAE,aAAa,EAAE,MAAM,sBAAsB,CAAC;AAE5D,qBAAa,eAAe;IACxB,OAAO,CAAC,QAAQ,CAAC,OAAO,CAAyD;IAE3E,KAAK,CAAC,IAAI,EAAE,KAAK,GAAG,OAAO,CAAC,aAAa,CAAC;CAcnD"}

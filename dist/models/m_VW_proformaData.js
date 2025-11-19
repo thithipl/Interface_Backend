@@ -15,6 +15,19 @@ exports.ProformaDataModel = {
             .where("proforma_Code", pfmNo)
             .orderBy("ItemOrder", "asc")
             .select("*");
+        // const decimalFields = [
+        //     "m3_total",
+        // ];
+        // const cleaned = result.map(row => {
+        //     const updated: any = { ...row };
+        //     for (const field of decimalFields) {
+        //         if (updated[field] !== null && updated[field] !== undefined) {
+        //             const num = Number(updated[field]);
+        //             updated[field] = Number(num.toFixed(4));
+        //         }
+        //     }
+        //     return updated as ProformaData;
+        // });
         return result;
     }
 };

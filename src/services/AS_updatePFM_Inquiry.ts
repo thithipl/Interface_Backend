@@ -5,7 +5,7 @@ export class InquiryService {
     async updatePFM(
         pfmNo: string,
         inquiryCode: string,
-        custCode: string = ""
+        custCode: string,
     ): Promise<UpdatePFMResult> {
         return InquiryModel.updateDataPFM_Inquiry(pfmNo, inquiryCode, custCode);
     }

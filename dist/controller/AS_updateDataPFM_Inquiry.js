@@ -6,16 +6,18 @@ const inquiryService = new AS_updatePFM_Inquiry_1.InquiryService();
 exports.InquiryController = {
     async updatePFM(req, res) {
         const { pfmNo, inquiryCode, custCode } = req.body;
-        if (!pfmNo || !inquiryCode) {
-            res.status(400).json({ message: "Missing required fields" });
-            return;
-        }
         try {
+            if (!pfmNo || !inquiryCode) {
+                res.status(401).json({ message: "Missing required fields" });
+                return;
+            }
             const result = await inquiryService.updatePFM(pfmNo, inquiryCode, custCode);
             if (result.success) {
                 res.status(200).json(result);
+                console.log("BODY:", req.body);
             }
             else {
+                console.log("BODY:", req.body);
                 res.status(400).json(result);
             }
         }

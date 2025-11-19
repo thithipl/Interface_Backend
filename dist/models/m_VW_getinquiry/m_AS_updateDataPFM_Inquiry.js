@@ -8,40 +8,61 @@ const index_1 = __importDefault(require("../../db/index"));
 exports.InquiryModel = {
     async updateDataPFM_Inquiry(pfmNo, inquiryCode, custCode) {
         try {
-            // เริ่ม query ตรวจสอบ PFM_No
-            let query = (0, index_1.default)("Autoshop.dbo.AS_Inquiries_mst").where("PFM_No", pfmNo);
-            // ถ้า custCode ไม่ว่าง → เพิ่มเงื่อนไข company_code
-            if (custCode && custCode.trim() !== "") {
-                query = query.andWhere("company_code", custCode);
-            }
-            const checkResult = await query.count("* as cnt");
-            const count = Number(checkResult[0]?.cnt ?? 0);
-            if (count <= 0) {
+            // 1) นับจำนวน PFM_No ที่มีอยู่
+            const countPFM = await (0, index_1.default)("Autoshop.dbo.AS_Inquiries_mst")
+                .where("PFM_No", pfmNo)
+                .count({ count: "*" })
+                .first();
+            const num = Number(countPFM?.count ?? 0);
+            // 2) นับจำนวน PFM_No + customer_code ที่ตรงกัน
+            const countPFM_Cust = await (0, index_1.default)("Autoshop.dbo.AS_Inquiries_mst")
+                .where("PFM_No", pfmNo)
+                .andWhere("company_code", custCode)
+                .count({ count: "*" })
+                .first();
+            const num2 = Number(countPFM_Cust?.count ?? 0);
+            // ✔ Check มี PFM_No อยู่ในระบบแล้ว
+            if (num > 0) {
+                // ✔ Check PFM_No + Customer ตรง → อัปเดต
+                if (num2 > 0) {
+                    const updated = await (0, index_1.default)("Autoshop.dbo.AS_Inquiries_mst")
+                        .where("inquiry_code", inquiryCode)
+                        .update({
+                        PFM_No: pfmNo,
+                        FPI_status: "Success",
+                        updated_at: index_1.default.fn.now(),
+                    });
+                    if (updated > 0) {
+                        return { success: true, status: "Success", message: "Success" };
+                    }
+                    return {
+                        success: false,
+                        status: "Error",
+                        message: "Unsuccess",
+                    };
+                }
+                // มี PFM_No แต่ Customer ไม่ตรง
                 return {
                     success: false,
                     status: "Error",
-                    message: "ไม่สามารถบันทึก PFM No. ได้ เนื่องจาก Customer Code ไม่ตรงกัน หรือ PFM_No ไม่มีอยู่ในระบบ",
+                    message: "ไม่สามารถบันทึก PFM No. ได้เนื่องจาก Customer Code ไม่ตรงกัน! กรุณาเลือก Inquiry ใหม่",
                 };
             }
-            // อัปเดต inquiry_code
-            const updated = await (0, index_1.default)("Autoshop.dbo.AS_Inquiries_mst")
+            // ✔ กรณีไม่พบ PFM_No เลย → อัปเดตได้ทันที
+            const updatedNew = await (0, index_1.default)("Autoshop.dbo.AS_Inquiries_mst")
                 .where("inquiry_code", inquiryCode)
                 .update({
                 PFM_No: pfmNo,
-                FPI_Status: "Success",
-                updated_at: index_1.default.fn.now(), // ถ้ามีคอลัมน์ updated_at
+                FPI_status: "Success",
+                updated_at: index_1.default.fn.now(),
             });
-            if (updated > 0) {
-                return {
-                    success: true,
-                    status: "Success",
-                    message: "Success",
-                };
+            if (updatedNew > 0) {
+                return { success: true, status: "Success", message: "Success" };
             }
             return {
                 success: false,
                 status: "Error",
-                message: "ไม่พบ inquiry ที่ต้องการอัปเดต หรืออัปเดตไม่สำเร็จ",
+                message: "Unsuccess",
             };
         }
         catch (error) {
@@ -49,7 +70,7 @@ exports.InquiryModel = {
             return {
                 success: false,
                 status: "Error",
-                message: error.message,
+                message: "Unsuccess",
             };
         }
     },

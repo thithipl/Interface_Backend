@@ -21,6 +21,7 @@ const VW_proformaHdr_routes_1 = __importDefault(require("./routes/VW_proformaHdr
 const VW_proformaDtl_routes_1 = __importDefault(require("./routes/VW_proformaDtl_routes"));
 const invoice_routes_1 = __importDefault(require("./routes/invoice_routes"));
 const token_routes_1 = __importDefault(require("./routes/token_routes"));
+const proformaPost_routes_1 = __importDefault(require("./routes/proformaPost_routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(cors());
@@ -43,6 +44,7 @@ app.use(`${API_PREFIX}/proformaHdr`, VW_proformaHdr_routes_1.default);
 app.use(`${API_PREFIX}/proformaDtl`, VW_proformaDtl_routes_1.default);
 app.use(`${API_PREFIX}/invoice`, invoice_routes_1.default);
 app.use(`${API_PREFIX}/login`, token_routes_1.default);
+app.use(`${API_PREFIX}/proforma`, proformaPost_routes_1.default);
 app.use("/test", (req, res) => {
     console.log("Test route is working");
     res.send(`Test route is working`);

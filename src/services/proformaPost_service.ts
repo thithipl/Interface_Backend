@@ -1,22 +1,22 @@
 import axios from "axios";
-import { InvoiceParam } from "../models/m_invoice";
-export class InvoiceService {
-    private readonly apiUrl = "https://www.fortuneparts.net/api/invoice/update";
+import { ProformaModelPost } from "../models/m_proforma/m_proformaPost";
 
-    async updateInvoice(data: InvoiceParam, token: string) {
+export class ProformaPostService {
+    private readonly apiUrl = "https://www.fortuneparts.net/api/proforma/update";
+
+    async postProforma(data: ProformaModelPost, token: string) {
         try {
             const headers = {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
             };
-
             const response = await axios.post(this.apiUrl, data, { headers });
             return response.data;
         } catch (error: any) {
-            console.error("InvoiceService.updateInvoice error:", error.message);
+            console.error("ProformaPostService.postProforma error:", error.message);
             throw new Error("Failed to update invoice: " + error.message);
         }
     }
 }
 
-export const invoiceService = new InvoiceService();
+export const proformaPostService = new ProformaPostService();

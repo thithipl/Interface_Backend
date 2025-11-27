@@ -1,22 +1,23 @@
 import express from "express";
 const cors = require("cors");
 import dotenv from "dotenv";
-import quotationRoutes from "./routes/quotation.routes";
-import quotationDtlRoutes from "./routes/quotationDtl_routes";
-import inquiryPFMNoRoutes from "./routes/VW_inquiryPFMNo_routes";
-import proformaDataRoutes from "./routes/VW_proformaData_routes";
-import inquiryDataRoutes from "./routes/VW_inquiryData_routes";
-import inquiryItemRoutes from "./routes/VW_inquiryItem_routes";
-import OnlyIqrRoutes from "./routes/VW_onlyiqr.routes";
-import inquiryReqRoutes from "./routes/VW_inquiryReq_routes";
-import inquiryAddRoutes from "./routes/VW_inquiryAdd_routes";
-import updatePFMRoutes from "./routes/AS_updateDataPFM_Inquiry";
-import inquiryDtlByPFMNoRoutes from "./routes/VW_inquiryDtlByPFMNo_routes";
-import proformaHdrRoutes from "./routes/VW_proformaHdr_routes";
-import proformaDtlRoutes from "./routes/VW_proformaDtl_routes";
-import invoiceRoutes from "./routes/invoice_routes";
+import quotationRoutes from "./routes/Quotation/quotation.routes";
+import quotationDtlRoutes from "./routes/Quotation/quotationDtl_routes";
+import inquiryPFMNoRoutes from "./routes/inquiry/VW_inquiryPFMNo_routes";
+import proformaDataRoutes from "./routes/Proforma/VW_proformaData_routes";
+import inquiryDataRoutes from "./routes/inquiry/VW_inquiryData_routes";
+import inquiryItemRoutes from "./routes/inquiry/VW_inquiryItem_routes";
+import OnlyIqrRoutes from "./routes/inquiry/VW_onlyiqr.routes";
+import inquiryReqRoutes from "./routes/inquiry/VW_inquiryReq_routes";
+import inquiryAddRoutes from "./routes/inquiry/VW_inquiryAdd_routes";
+import updatePFMRoutes from "./routes/Proforma/AS_updateDataPFM_Inquiry";
+import inquiryDtlByPFMNoRoutes from "./routes/inquiry/VW_inquiryDtlByPFMNo_routes";
+import proformaHdrRoutes from "./routes/Proforma/VW_proformaHdr_routes";
+import proformaDtlRoutes from "./routes/Proforma/VW_proformaDtl_routes";
+import invoiceRoutes from "./routes/invoice/invoice_routes";
 import tokenRoutes from "./routes/token_routes";
-import proformaPostRoutes from "./routes/proformaPost_routes";
+import proformaPostRoutes from "./routes/Proforma/proformaPost_routes";
+import get_ProductItemRoutes from "./routes/Product_Item/get_ProductItem_routes";
 
 dotenv.config();
 const app = express();
@@ -43,6 +44,7 @@ app.use(`${API_PREFIX}/proformaDtl`, proformaDtlRoutes);
 app.use(`${API_PREFIX}/invoice`, invoiceRoutes);
 app.use(`${API_PREFIX}/login`, tokenRoutes);
 app.use(`${API_PREFIX}/proforma`, proformaPostRoutes);
+app.use(`${API_PREFIX}/getProductItem`, get_ProductItemRoutes);
 
 
 

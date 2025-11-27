@@ -1,0 +1,1 @@
+{"version":3,"file":"proformaPost_service.d.ts","sourceRoot":"","sources":["../../../src/services/Proforma/proformaPost_service.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,iBAAiB,EAAE,MAAM,wCAAwC,CAAC;AAE3E,qBAAa,mBAAmB;IAC5B,OAAO,CAAC,QAAQ,CAAC,MAAM,CAAsD;IAEvE,YAAY,CAAC,IAAI,EAAE,iBAAiB,EAAE,KAAK,EAAE,MAAM;CAa5D;AAED,eAAO,MAAM,mBAAmB,qBAA4B,CAAC"}

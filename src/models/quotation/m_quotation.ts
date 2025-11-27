@@ -1,0 +1,110 @@
+import db from "../../db/index";
+
+export interface Quotation {
+    TransactionNo: string;
+    TransactionTypeI: string | null;
+    TransactionTypeT: string | null;
+    IsClosed: boolean | null;
+    IsOrderedFailed: boolean | null;
+    OnDate: Date | null;
+    Notes: string | null;
+    TeleOrder: string | null;
+    SalesType: string | null;
+    OrderNo: string | null;
+    Amendment: string | null;
+    OrderDate: Date | null;
+    RefQuotationNo: string | null;
+    CustomerCode: string | null;
+    CustomerName: string | null;
+    BillingAddress: string | null;
+    ShippingAddress: string | null;
+    Agent: string | null;
+    AgentCommission: number | null;
+    AgentAmount: number | null;
+    SalesPerson: string | null;
+    SalesPersonCommission: number | null;
+    SalesPersonAmount: number | null;
+    Currency: string | null;
+    Exchange: number | null;
+    PaymentBy: string | null;
+    OurBanker: string | null;
+    OurBankerDescription: string | null;
+    MarksandNumbers: string | null;
+    PrintedRemarks: string | null;
+    NotesforInternalUse: string | null;
+    Packing: string | null;
+    Fumigation: string | null;
+    Inspection: string | null;
+    DucumentRequired: string | null;
+    Penalty: string | null;
+    TotalQuanlity: number | null;
+    TotalAmount: number | null;
+    TotalDiscountAmount: number | null;
+    TotalActualAmount: number | null;
+    ChangeBy: string | null;
+    AmendmentDate: Date | null;
+    DescriptionofChange: string | null;
+    Sailing: string | null;
+    SailingFrom: string | null;
+    SailingTo: string | null;
+    InvoiceOf: string | null;
+    Payment: string | null;
+    Via: string | null;
+    DeliveryDateHdr: Date | null;
+    PriceTerms: string | null;
+    PriceFrom: string | null;
+    InsuranceCharge: number | null;
+    FreightCharge: number | null;
+    DocumentCharge: number | null;
+    IsPartial: boolean | null;
+    IsTranship: boolean | null;
+    ShippedBy: string | null;
+    Delivery: string | null;
+    Account: string | null;
+    Beneficially: string | null;
+    Address: string | null;
+    Validity: string | null;
+    Port: string | null;
+    Discount: number | null;
+    DiscountAmount: number | null;
+    VAT: number | null;
+    VATAmount: number | null;
+    ClaimNo: string | null;
+    Claim: string | null;
+    CustomerPoNo: string | null;
+    Shipper: string | null;
+    ShipperName: string | null;
+    ShipperAddress: string | null;
+    EntryBy: string | null;
+    EntryDate: Date | null;
+    status: string | null;
+    backorder: boolean | null;
+    Fut: string | null;
+    numcon: string | null;
+    contract: string | null;
+    customerpo: string | null;
+    Follow: string | null;
+    Fdownload: string | null;
+    Trading: string | null;
+    IncludeVat: boolean | null;
+    Cur_rate: number | null;
+    AddDate: Date | null;
+    ReExport: string | null;
+    App_Price: number | null;
+}
+
+export const QuotationModel = {
+    async getTop1000(): Promise<Quotation[]> {
+        return db<Quotation>("data_2003.dbo.QuotationHdr")
+            .select("*")
+            .limit(1000);
+    },
+
+    async getByOrderNo(orderNo: string): Promise<Quotation | null> {
+        const quotation = await db<Quotation>("data_2003.dbo.QuotationHdr")
+            .select("*")
+            .where("OrderNo", orderNo)
+            .first();
+        return quotation || null;
+    }
+};

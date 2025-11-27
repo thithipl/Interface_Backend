@@ -1,5 +1,5 @@
-import { ProformaHdr } from "../m_VW_proformaHdr";
-import { ProformaDtl } from "../m_VW_proformaDtl";
+import { ProformaHdr } from "../m_proforma/m_VW_proformaHdr";
+import { ProformaDtl } from "../m_proforma/m_VW_proformaDtl";
 export interface ProformaModelPost {
     header: ProformaHdr;
     details: ProformaDtl[];

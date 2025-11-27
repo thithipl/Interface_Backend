@@ -1,0 +1,1 @@
+{"version":3,"file":"m_VW_inquiryPFMNo.js","sourceRoot":"","sources":["../../../src/models/m_proforma/m_VW_inquiryPFMNo.ts"],"names":[],"mappings":";;;;;;AAAA,2DAAgC;AAkCnB,QAAA,yBAAyB,GAAG;IACrC,KAAK,CAAC,sBAAsB;QACxB,MAAM,MAAM,GAAG,MAAM,IAAA,eAAE,EAAuB,wCAAwC,CAAC;aAClF,OAAO,CAAC,IAAI,EAAE,MAAM,CAAC;aACrB,MAAM,CAAC,GAAG,CAAC,CAAC;QACjB,OAAO,MAAM,CAAC;IAClB,CAAC;CACJ,CAAA"}

@@ -14,10 +14,8 @@ exports.InquiryController = {
             const result = await inquiryService.updatePFM(pfmNo, inquiryCode, custCode);
             if (result.success) {
                 res.status(200).json(result);
-                console.log("BODY:", req.body);
             }
             else {
-                console.log("BODY:", req.body);
                 res.status(400).json(result);
             }
         }

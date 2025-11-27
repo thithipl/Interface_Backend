@@ -1,4 +1,4 @@
-import { InvoiceParam } from "../models/m_invoice";
+import { InvoiceParam } from "../models/m_invoicePost";
 export declare class InvoiceService {
     private readonly apiUrl;
     updateInvoice(data: InvoiceParam, token: string): Promise<any>;

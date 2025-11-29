@@ -5,5 +5,6 @@ export interface InquiryDtlByPFMNo {
 }
 export declare const DTLInquiryByPFMNoModel: {
     getDataDTLInquiry(pfmcode: string): Promise<InquiryDtlByPFMNo[]>;
+    getPFMCode(): Promise<InquiryDtlByPFMNo[]>;
 };
 //# sourceMappingURL=m_VW_inquiryDtlByPFMNo.d.ts.map

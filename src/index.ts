@@ -39,6 +39,7 @@ app.use(`${API_PREFIX}/inquiryReq`, inquiryReqRoutes);
 app.use(`${API_PREFIX}/inquiryAdd`, inquiryAddRoutes);
 app.use(`${API_PREFIX}/updatePFM`, updatePFMRoutes);
 app.use(`${API_PREFIX}/inquiryDtlByPFMNo`, inquiryDtlByPFMNoRoutes);
+app.use(`${API_PREFIX}/PFMNo`, inquiryDtlByPFMNoRoutes);
 app.use(`${API_PREFIX}/proformaHdr`, proformaHdrRoutes);
 app.use(`${API_PREFIX}/proformaDtl`, proformaDtlRoutes);
 app.use(`${API_PREFIX}/invoice`, invoiceRoutes);

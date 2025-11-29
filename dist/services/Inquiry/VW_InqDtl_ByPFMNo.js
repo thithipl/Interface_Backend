@@ -6,6 +6,9 @@ class InquiryDtlByPFMNoService {
     async getDataDTLInquiry(pfmcode) {
         return await m_VW_inquiryDtlByPFMNo_1.DTLInquiryByPFMNoModel.getDataDTLInquiry(pfmcode);
     }
+    async getPFMCode() {
+        return await m_VW_inquiryDtlByPFMNo_1.DTLInquiryByPFMNoModel.getPFMCode();
+    }
 }
 exports.InquiryDtlByPFMNoService = InquiryDtlByPFMNoService;
 //# sourceMappingURL=VW_InqDtl_ByPFMNo.js.map

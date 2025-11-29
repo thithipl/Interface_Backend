@@ -12,5 +12,10 @@ exports.DTLInquiryByPFMNoModel = {
             .select("*");
         return result;
     },
+    async getPFMCode() {
+        return (0, index_1.default)('Autoshop.dbo.VW_AS_getDataInquiryCodePFMNo')
+            .orderBy("PFM_No", "desc")
+            .select('PFM_No');
+    },
 };
 //# sourceMappingURL=m_VW_inquiryDtlByPFMNo.js.map

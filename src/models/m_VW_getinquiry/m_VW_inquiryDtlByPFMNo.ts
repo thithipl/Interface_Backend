@@ -13,4 +13,10 @@ export const DTLInquiryByPFMNoModel = {
             .select("*");
         return result;
     },
+
+    async getPFMCode(): Promise<InquiryDtlByPFMNo[]> {
+        return db<InquiryDtlByPFMNo>('Autoshop.dbo.VW_AS_getDataInquiryCodePFMNo')
+            .orderBy("PFM_No", "desc")
+            .select('PFM_No');
+    },
 }

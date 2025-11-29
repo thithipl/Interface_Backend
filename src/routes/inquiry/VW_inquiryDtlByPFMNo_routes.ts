@@ -4,5 +4,6 @@ import { InquiryDtlByPFMNoController } from "../../controller/Inquiry/VW_inquiry
 const router = Router();
 
 router.get("/:pfmcode", InquiryDtlByPFMNoController.getDataDTLInquiry);
+router.get("/", InquiryDtlByPFMNoController.getPFMCode);
 
 export default router;

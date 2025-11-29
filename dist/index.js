@@ -41,6 +41,7 @@ app.use(`${API_PREFIX}/inquiryReq`, VW_inquiryReq_routes_1.default);
 app.use(`${API_PREFIX}/inquiryAdd`, VW_inquiryAdd_routes_1.default);
 app.use(`${API_PREFIX}/updatePFM`, AS_updateDataPFM_Inquiry_1.default);
 app.use(`${API_PREFIX}/inquiryDtlByPFMNo`, VW_inquiryDtlByPFMNo_routes_1.default);
+app.use(`${API_PREFIX}/PFMNo`, VW_inquiryDtlByPFMNo_routes_1.default);
 app.use(`${API_PREFIX}/proformaHdr`, VW_proformaHdr_routes_1.default);
 app.use(`${API_PREFIX}/proformaDtl`, VW_proformaDtl_routes_1.default);
 app.use(`${API_PREFIX}/invoice`, invoice_routes_1.default);

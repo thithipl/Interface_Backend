@@ -5,4 +5,7 @@ export class InquiryDtlByPFMNoService {
     async getDataDTLInquiry(pfmcode: string): Promise<InquiryDtlByPFMNo[]> {
         return await DTLInquiryByPFMNoModel.getDataDTLInquiry(pfmcode);
     }
+    async getPFMCode(): Promise<InquiryDtlByPFMNo[]> {
+        return await DTLInquiryByPFMNoModel.getPFMCode();
+    }
 }

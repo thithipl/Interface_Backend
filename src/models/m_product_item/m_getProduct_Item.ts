@@ -16,8 +16,10 @@ export interface ProductItem {
 }
 
 export class GetProductItemModel {
-    static async InsertData(prod: ProductItem[]) {
+    static async UpsertData(prod: ProductItem[]) {
         let pool: sql.ConnectionPool | undefined;
+        let transaction: sql.Transaction | undefined;
+        const tempTableName = `##TempProductItem_${Date.now()}`;
 
         try {
             if (!Array.isArray(prod) || prod.length === 0) {
@@ -26,50 +28,103 @@ export class GetProductItemModel {
             }
 
             pool = await sql.connect(dbConfig);
-            console.log(`Successfully connected and preparing to insert ${prod.length} records.`);
+            transaction = new sql.Transaction(pool);
+            await transaction.begin();
+            const request = new sql.Request(transaction);
 
-            const table = new sql.Table('[Autoshop].[dbo].[AU_get_Product_item]');
+            console.log(`1. Creating temporary table and bulk inserting ${prod.length} records.`);
+
+            await request.query(`
+                SELECT TOP 0 * INTO ${tempTableName} 
+                FROM [Autoshop].[dbo].[AU_get_Product_item] 
+                WHERE 1 = 0;
+            `);
+
+            const table = new sql.Table(tempTableName);
             table.create = false;
 
-            table.columns.add('sub_category_code', sql.VarChar(50), { nullable: true });
-            table.columns.add('sub_category_name', sql.VarChar(255), { nullable: true });
-            table.columns.add('product_code', sql.VarChar(50), { nullable: true });
-            table.columns.add('fpi_code', sql.VarChar(50), { nullable: true });
+            table.columns.add('sub_category_code', sql.VarChar(sql.MAX), { nullable: true });
+            table.columns.add('sub_category_name', sql.VarChar(sql.MAX), { nullable: true });
+            table.columns.add('product_code', sql.VarChar(sql.MAX), { nullable: true });
+            table.columns.add('fpi_code', sql.VarChar(sql.MAX), { nullable: true });
             table.columns.add('product_name', sql.NVarChar(sql.MAX), { nullable: true });
             table.columns.add('patterndesciption', sql.NVarChar(sql.MAX), { nullable: true });
             table.columns.add('specifiaction', sql.NVarChar(sql.MAX), { nullable: true });
-            table.columns.add('oem', sql.VarChar(255), { nullable: true });
+            table.columns.add('oem', sql.VarChar(sql.MAX), { nullable: true });
             table.columns.add('m3', sql.Decimal(18, 4), { nullable: true });
             table.columns.add('nw', sql.Decimal(18, 4), { nullable: true });
             table.columns.add('gw', sql.Decimal(18, 4), { nullable: true });
 
             for (const p of prod) {
                 table.rows.add(
-                    p.sub_category_code,
-                    p.sub_category_name,
-                    p.product_code,
-                    p.fpi_code,
-                    p.product_name,
-                    p.patterndesciption,
-                    p.specifiaction,
-                    p.oem,
-                    Number(p.m3) || 0,
-                    Number(p.nw) || 0,
-                    Number(p.gw) || 0
+                    p.sub_category_code, p.sub_category_name, p.product_code, p.fpi_code,
+                    p.product_name, p.patterndesciption, p.specifiaction, p.oem,
+                    Number(p.m3) || 0, Number(p.nw) || 0, Number(p.gw) || 0
                 );
             }
 
-            const request = new sql.Request(pool);
-            const result = await request.bulk(table);
+            await request.bulk(table);
+            console.log('2. Bulk Insert into temporary table successful.');
 
-            console.log(`Bulk Insert success. Rows affected: ${result.rowsAffected}`);
-            return result;
+            const targetTable = '[Autoshop].[dbo].[AU_get_Product_item]';
+
+            const mergeQuery = `
+                MERGE ${targetTable} AS Target
+                USING ${tempTableName} AS Source
+                ON (Target.product_code = Source.product_code)
+                WHEN MATCHED THEN
+                    UPDATE SET
+                        Target.sub_category_name = Source.sub_category_name,
+                        Target.product_name = Source.product_name,
+                        Target.patterndesciption = Source.patterndesciption,
+                        Target.specifiaction = Source.specifiaction,
+                        Target.oem = Source.oem,
+                        Target.m3 = Source.m3,
+                        Target.nw = Source.nw,
+                        Target.gw = Source.gw
+                
+                WHEN NOT MATCHED THEN
+                    INSERT (
+                        sub_category_code, sub_category_name, product_code, fpi_code, 
+                        product_name, patterndesciption, specifiaction, oem, m3, nw, gw
+                    )
+                    VALUES (
+                        Source.sub_category_code, Source.sub_category_name, Source.product_code, Source.fpi_code, 
+                        Source.product_name, Source.patterndesciption, Source.specifiaction, Source.oem, Source.m3, Source.nw, Source.gw
+                    )
+                
+                OUTPUT $action;
+                ;
+            `;
+            const mergeResult = await request.query(mergeQuery);
+            console.log(`3. MERGE complete. Total rows affected: ${mergeResult.rowsAffected}`);
+
+            await transaction.commit();
+
+            return mergeResult;
 
         } catch (error) {
-            console.error('Error during Bulk Insert:', error);
+            console.error('Error during Upsert operation:', error);
+
+            if (transaction?.begin) {
+                await transaction.rollback();
+                console.log('Transaction rolled back.');
+            }
             throw new Error(`Database operation failed: ${error instanceof Error ? error.message : String(error)}`);
         } finally {
             if (pool) {
+                try {
+                    const dropQuery = `
+                IF OBJECT_ID('${tempTableName}', 'U') IS NOT NULL
+                BEGIN
+                    DROP TABLE ${tempTableName};
+                END
+            `;
+                    await pool.request().query(dropQuery);
+                    console.log(`Temporary table ${tempTableName} dropped.`);
+                } catch (dropError) {
+                    console.error('Error dropping temp table:', dropError);
+                }
                 await pool.close();
                 console.log('Database connection closed.');
             }

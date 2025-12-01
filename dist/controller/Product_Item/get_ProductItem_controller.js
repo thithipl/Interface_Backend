@@ -3,10 +3,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetProductItemController = void 0;
 const get_ProductItem_service_1 = require("../../services/Product_Item/get_ProductItem_service");
 const m_getProduct_Item_1 = require("../../models/m_product_item/m_getProduct_Item");
-const BATCH_SIZE = 1000;
+const BATCH_SIZE = 3000;
 class GetProductItemController {
     static async syncGetProductItem(req, res) {
         const token = req.headers.authorization?.replace("Bearer ", "");
+        const raw = req.query.code;
+        let code = "";
+        if (typeof raw === "string") {
+            code = raw;
+        }
+        else if (Array.isArray(raw)) {
+            const first = raw[0];
+            code = typeof first === "string" ? first : "";
+        }
         const start = Number(req.query.start || 0);
         const limit = Number(req.query.limit || 1000);
         if (!token) {
@@ -16,7 +25,7 @@ class GetProductItemController {
             });
         }
         try {
-            const products = await get_ProductItem_service_1.ApiService.fetchProductsFromExternal(token, start, limit);
+            const products = await get_ProductItem_service_1.ApiService.fetchProductsFromExternal(token, code, start, limit);
             if (!products || products.length === 0) {
                 return res.status(404).json({ message: 'No data found from API' });
             }
@@ -25,21 +34,28 @@ class GetProductItemController {
             let recordsInserted = 0;
             for (let i = 0; i < totalRecords; i += BATCH_SIZE) {
                 const batch = products.slice(i, i + BATCH_SIZE);
-                const result = await m_getProduct_Item_1.GetProductItemModel.InsertData(batch);
-                recordsInserted += result.rowsAffected;
-                console.log(`✅ Processed Batch ${Math.ceil((i + 1) / BATCH_SIZE)}: Inserted ${result.rowsAffected} records.`);
+                const result = await m_getProduct_Item_1.GetProductItemModel.UpsertData(batch);
+                if (Array.isArray(result.rowsAffected)) {
+                    recordsInserted += result.rowsAffected.reduce((acc, cur) => acc + cur, 0);
+                }
+                else {
+                    recordsInserted += result.rowsAffected;
+                }
+                console.log(`Processed Batch ${Math.ceil((i + 1) / BATCH_SIZE)}: Inserted ${result.rowsAffected} records.`);
             }
-            // 4. ส่ง Response กลับ
             return res.status(200).json({
                 success: true,
-                message: `Successfully imported ${products.length} items into Database.`
+                message: `Successfully imported ${products.length} items into Database.`,
+                totalFetched: totalRecords,
+                totalInserted: recordsInserted
             });
         }
         catch (error) {
-            console.error(error);
+            console.error('Error during synchronization:', error);
+            const errorMessage = error instanceof Error ? error.message : 'An unknown database error occurred.';
             return res.status(500).json({
                 success: false,
-                message: error.message
+                message: `Synchronization failed: ${errorMessage}`
             });
         }
     }

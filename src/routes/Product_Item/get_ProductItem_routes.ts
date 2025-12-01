@@ -8,6 +8,6 @@ const router = Router();
  * และทำการ Bulk Insert ลงใน SQL Server
  * Token ต้องถูกส่งมาใน Request Body หรือ Query Parameter
  */
-router.post('/sync', GetProductItemController.syncGetProductItem);
+router.post('/item', GetProductItemController.syncGetProductItem);
 
 export default router;

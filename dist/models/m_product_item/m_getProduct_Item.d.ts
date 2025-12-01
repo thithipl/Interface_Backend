@@ -1,3 +1,4 @@
+import sql from 'mssql';
 export interface ProductItem {
     sub_category_code: string;
     sub_category_name: string;
@@ -12,7 +13,7 @@ export interface ProductItem {
     gw: number;
 }
 export declare class GetProductItemModel {
-    static InsertData(prod: ProductItem[]): Promise<{
+    static UpsertData(prod: ProductItem[]): Promise<sql.IResult<any> | {
         rowsAffected: number;
     }>;
 }

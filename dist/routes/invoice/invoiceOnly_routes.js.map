@@ -1,0 +1,1 @@
+{"version":3,"file":"invoiceOnly_routes.js","sourceRoot":"","sources":["../../../src/routes/invoice/invoiceOnly_routes.ts"],"names":[],"mappings":";;AAAA,qCAAiC;AACjC,gGAA+F;AAE/F,MAAM,MAAM,GAAG,IAAA,gBAAM,GAAE,CAAC;AAExB,MAAM,CAAC,GAAG,CAAC,GAAG,EAAE,iDAAwB,CAAC,cAAc,CAAC,CAAC;AACzD,MAAM,CAAC,GAAG,CAAC,eAAe,EAAE,iDAAwB,CAAC,cAAc,CAAC,CAAC;AAErE,kBAAe,MAAM,CAAC"}

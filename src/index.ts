@@ -18,6 +18,9 @@ import invoiceRoutes from "./routes/invoice/invoice_routes";
 import tokenRoutes from "./routes/token_routes";
 import proformaPostRoutes from "./routes/Proforma/proformaPost_routes";
 import get_ProductItemRoutes from "./routes/Product_Item/get_ProductItem_routes";
+import getInvoiceRoutes from "./routes/invoice/invoiceOnly_routes";
+import invoiceJsonRoutes from "./routes/invoice/invoiceJson_routes";
+
 
 dotenv.config();
 const app = express();
@@ -46,7 +49,8 @@ app.use(`${API_PREFIX}/invoice`, invoiceRoutes);
 app.use(`${API_PREFIX}/login`, tokenRoutes);
 app.use(`${API_PREFIX}/proforma`, proformaPostRoutes);
 app.use(`${API_PREFIX}/getProductItem`, get_ProductItemRoutes);
-
+app.use(`${API_PREFIX}/invoiceOnly`, getInvoiceRoutes);
+app.use(`${API_PREFIX}/invoiceJson`, invoiceJsonRoutes);
 
 
 

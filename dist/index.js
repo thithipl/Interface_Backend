@@ -23,6 +23,8 @@ const invoice_routes_1 = __importDefault(require("./routes/invoice/invoice_route
 const token_routes_1 = __importDefault(require("./routes/token_routes"));
 const proformaPost_routes_1 = __importDefault(require("./routes/Proforma/proformaPost_routes"));
 const get_ProductItem_routes_1 = __importDefault(require("./routes/Product_Item/get_ProductItem_routes"));
+const invoiceOnly_routes_1 = __importDefault(require("./routes/invoice/invoiceOnly_routes"));
+const invoiceJson_routes_1 = __importDefault(require("./routes/invoice/invoiceJson_routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(cors());
@@ -48,6 +50,8 @@ app.use(`${API_PREFIX}/invoice`, invoice_routes_1.default);
 app.use(`${API_PREFIX}/login`, token_routes_1.default);
 app.use(`${API_PREFIX}/proforma`, proformaPost_routes_1.default);
 app.use(`${API_PREFIX}/getProductItem`, get_ProductItem_routes_1.default);
+app.use(`${API_PREFIX}/invoiceOnly`, invoiceOnly_routes_1.default);
+app.use(`${API_PREFIX}/invoiceJson`, invoiceJson_routes_1.default);
 app.use("/test", (req, res) => {
     console.log("Test route is working");
     res.send(`Test route is working`);

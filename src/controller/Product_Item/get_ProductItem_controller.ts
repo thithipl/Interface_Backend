@@ -49,7 +49,6 @@ export class GetProductItemController {
                 } else {
                     recordsInserted += result.rowsAffected;
                 }
-                console.log(`Processed Batch ${Math.ceil((i + 1) / BATCH_SIZE)}: Inserted ${result.rowsAffected} records.`);
             }
             return res.status(200).json({
                 success: true,

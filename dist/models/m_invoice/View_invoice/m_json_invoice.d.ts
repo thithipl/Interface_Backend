@@ -3,7 +3,7 @@ export interface JsonInvoice {
     proforma_code: string;
     id: number;
     created_at: Date;
-    JSONOutput: string;
+    JSONOutput: object;
 }
 export declare const detailInvoice_json: {
     /**

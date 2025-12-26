@@ -18,11 +18,14 @@ export const emptyInvoice = {
             query = query.where('InvoiceCode', 'LIKE', searchPattern);
         }
 
+        if (!invoiceCode) {
+            query = query
+                .limit(100)
+        }
+
         query = query.orderBy('created_at', 'desc').select('*');
 
-        if (!invoiceCode) {
-            query = query.limit(100);
-        }
+
         const result = await query;
         return result;
     },

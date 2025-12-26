@@ -4,87 +4,89 @@ exports.createParsedInvoice = createParsedInvoice;
 /**
  *
  * @param rawData
+ * @param rawItemData
+ * @returns ParsedInvoice
+ *
  */
-function createParsedInvoice(rawData) {
-    const safeParseFloat = (value) => Number.parseFloat(value) || 0;
-    const safeParseInt = (value) => Number.parseInt(value, 10) || 0;
-    const convertedItems = (rawData.items || []).map((item) => ({
-        proforma_code: item.proforma_code || '',
-        product_code: item.product_code || '',
-        unit_price: safeParseFloat(item.unit_price),
-        qty: item.qty || '',
-        unit: item.unit || '',
-        amount: safeParseFloat(item.amount),
-        pack_ctn: safeParseInt(item.pack_ctn),
-        ctn_total: safeParseInt(item.ctn_total),
-        m3: item.m3 || '',
-        m3_total: item.m3_total || '',
-        nw: item.nw || '',
-        gw: item.gw || '',
-        remark_customer: item.remark_customer || '',
-        remark_sales: item.remark_sales || '',
-    }));
-    const convertedClaims = (rawData.claims || []).map((claim) => ({
-        claim_code: claim.claim_code || '',
-    }));
-    const convertedShipping = (rawData.shipping || []).map((shipping) => ({
-        est_date: shipping.est_date ? new Date(shipping.est_date) : new Date(),
-        etd: shipping.etd || '',
-        eta: shipping.eta || '',
-        pop: shipping.pop || '',
-        from_port: shipping.from_port || '',
-        to_port: shipping.to_port || '',
-        fut40hq: shipping.fut40hq || '',
-        fut40: shipping.fut40 || '',
-        fut20: shipping.fut20 || '',
-        fright_fut40hq: shipping.fright_fut40hq || '',
-        fright_fut40: shipping.fright_fut40 || '',
-        fright_fut20: shipping.fright_fut20 || '',
-        document_charge: shipping.document_charge || '',
-        insurance_charge: shipping.insurance_charge || '',
-        net_weight: shipping.net_weight || '',
-        gross_weight: shipping.gross_weight || '',
-        measurement: shipping.measurement || '',
-        country_of_origin: shipping.country_of_origin || '',
-        shipline: shipping.shipline || '',
-        status: shipping.status || '',
-    }));
-    const invoiceHeader = {
-        invoice_code: rawData.invoice_code || '',
-        proforma_code: rawData.proforma_code || '',
-        agent_code: rawData.agent_code || '',
-        consignee_id: rawData.consignee_id || '',
-        invoice_of: rawData.invoice_of || '',
-        payment: rawData.payment || '',
-        price_total: rawData.price_total || '0.00',
-        currency_code: rawData.currency_code || '',
-        price_item_total: rawData.price_item_total || '0.00',
-        discount: rawData.discount || '0.00',
-        vat: rawData.vat || '0.00',
-        grand_total: rawData.grand_total || '0.00',
-        deposit: rawData.deposit || '',
-        delivery_term: rawData.delivery_term || '',
-        delivery_port_name: rawData.delivery_port_name || '',
-        due_date: rawData.due_date ? new Date(rawData.due_date) : new Date(0),
-        status: rawData.status || '',
-        remark: rawData.remark || '',
-        shipping: convertedShipping,
-        items: convertedItems,
-        claims: convertedClaims,
-        // Additional fields
-        id: rawData.id,
-        company_id: rawData.company_id,
-        company_contact_id: rawData.company_contact_id,
-        is_active: rawData.is_active,
-        created_by: rawData.created_by,
-        created_at: rawData.created_at,
-        updated_by: rawData.updated_by,
-        updated_at: rawData.updated_at,
+function createParsedInvoice(rawData, rawItemData) {
+    if (!rawData || rawData.length === 0) {
+        return { detail: [] };
+    }
+    const convertedHeaders = rawData.map((rawHeader) => {
+        const singleShipping = rawHeader ? [{
+                est_date: rawHeader.est_date ? new Date(rawHeader.est_date) : null,
+                etd: rawHeader.etd ? new Date(rawHeader.etd) : null,
+                eta: rawHeader.eta ? new Date(rawHeader.eta) : null,
+                pop: rawHeader.pop || null,
+                from_port: rawHeader.from_port || '',
+                to_port: rawHeader.to_port || '',
+                fut40hq: rawHeader.fut40hq ?? 0,
+                fut40: rawHeader.fut40 ?? 0,
+                fut20: rawHeader.fut20 ?? 0,
+                fright_fut40hq: rawHeader.fright_fut40hq ?? 0,
+                fright_fut40: rawHeader.fright_fut40 ?? 0,
+                fright_fut20: rawHeader.fright_fut20 ?? 0,
+                document_charge: rawHeader.document_charge ?? null,
+                insurance_charge: rawHeader.insurance_charge ?? null,
+                net_weight: rawHeader.net_weight ?? null,
+                gross_weight: rawHeader.gross_weight ?? null,
+                measurement: rawHeader.measurement ?? null,
+                country_of_origin: rawHeader.country_of_origin || '',
+                shipline: rawHeader.shipline || '',
+                status: rawHeader.statuss || '',
+            }] : [];
+        const invoiceItem = (rawItemData || []).map((item) => ({
+            proforma_code: item.proforma_code || null,
+            product_code: item.product_code || null,
+            unit_price: item.unit_price ?? null,
+            qty: item.qty ?? null,
+            unit: item.unit ?? null,
+            amount: item.amount ?? null,
+            pack_ctn: item.pack_ctn ?? null,
+            ctn_total: item.ctn_total ?? null,
+            m3: item.m3 ?? null,
+            m3_total: item.m3_total ?? null,
+            nw: item.nw ?? null,
+            gw: item.gw ?? null,
+            remark_customer: item.remark_customer || null,
+            remark_sales: item.remark_sales || null,
+            OurCode: item.OurCode || null,
+            Description: item.Description || null
+        }));
+        const invoiceHdr = {
+            invoice_code: rawHeader.invoice_code || '',
+            proforma_code: rawHeader.proforma_code || '',
+            agent_code: rawHeader.agent_code || '',
+            consignee_id: rawHeader.consignee_id || '',
+            invoice_of: rawHeader.invoiceOf || '',
+            payment: (rawHeader.payment || '').trim(),
+            price_total: rawHeader.price_total ?? 0,
+            currency_code: rawHeader.currency_code || '',
+            price_item_total: rawHeader.price_item_total ?? 0,
+            discount: rawHeader.discount ?? null,
+            vat: rawHeader.vat ?? null,
+            grand_total: rawHeader.grand_total ?? 0,
+            deposit: rawHeader.deposit ?? 0,
+            delivery_term: rawHeader.delivery_term || '',
+            delivery_port_name: rawHeader.delivery_port_name || '',
+            due_date: rawHeader.due_date ? new Date(rawHeader.due_date) : new Date(),
+            status: rawHeader.status || '',
+            remark: rawHeader.Remarks || null,
+            Address: rawHeader.Address || null,
+            InvoiceFrom: rawHeader.InvoiceFrom || null,
+            InvoiceTo: rawHeader.InvoiceTo || null,
+            invoicedate: rawHeader.invoicedate ? new Date(rawHeader.invoicedate) : new Date(),
+            shipping: singleShipping,
+            items: invoiceItem,
+            claims: rawHeader.claim_code
+                ? [{ claim_code: rawHeader.claim_code }]
+                : [{ claim_code: '' }],
+        };
+        return invoiceHdr;
+    });
+    return {
+        detail: convertedHeaders,
     };
-    const parsedInvoice = {
-        ...invoiceHeader,
-        detail: invoiceHeader,
-    };
-    return parsedInvoice;
 }
+;
 //# sourceMappingURL=invoice_parser.js.map

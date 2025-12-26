@@ -1,10 +1,10 @@
 export interface ProformaHdr {
-    proforma_Code: string | null;
+    proforma_code: string | null;
     inquiry_code: string | null;
     Messrs: string | null;
-    agent_code: string | null;
+    agent_code?: string | null;
     consignee_id: string | null;
-    Invoice_of: string | null;
+    invoice_of: string | null;
     Sailling_to: string | null;
     billing_address: string | null;
     ship_to_port_name: string | null;

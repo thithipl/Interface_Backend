@@ -55,7 +55,7 @@ export interface InvoiceHeader {
     proforma_code: string | null;
     agent_code: string | null;
     consignee_id: string | null;
-    invoice_of: string | null;
+    invoiceOf: string | null;
     payment: string | null;
     price_total: string | null;
     currency_code: string | null;
@@ -66,20 +66,9 @@ export interface InvoiceHeader {
     deposit: string | null;
     delivery_term: string | null;
     delivery_port_name: string | null;
-    due_date: Date | null;
+    due_date: string | null;
     status: string | null;
-    remark: string | null;
-    shipping: InvoiceShipping[];
-    items: InvoiceItem[];
-    claims: Claim[];
-    id?: string;
-    company_id?: string;
-    company_contact_id?: string;
-    is_active?: string;
-    created_by?: string;
-    created_at?: string;
-    updated_by?: string;
-    updated_at?: string;
+    Remarks: string | null;
 }
 /**
  * @interface Claim
@@ -94,7 +83,7 @@ export interface Claim {
  * The final structure for consumption, encapsulating the main data
  * and duplicating it under the 'detail' key.
  */
-export interface ParsedInvoice extends InvoiceHeader {
+export interface ParsedInvoice {
     detail: InvoiceHeader;
 }
 //# sourceMappingURL=m_convertJson_invoice.d.ts.map

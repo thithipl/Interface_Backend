@@ -8,39 +8,32 @@ class InvoiceController {
 
     getInvoiceConvert = async (req: Request, res: Response): Promise<void> => {
         try {
-            const invoiceCode = req.params.invoiceCode;
-            const rawDbData = await service.getInvoiceJson(invoiceCode);
+            const { invoiceCode } = req.params;
+            if (!invoiceCode) {
+                res.status(400).json({ message: "Invoice Code is required." });
+                return;
+            }
 
-            if (!rawDbData || rawDbData.length === 0) {
+            const [rawDbData, rawItemData] = await Promise.all([
+                service.getInvoiceJson(invoiceCode),
+                service.getInvoiceItems(invoiceCode),
+            ]);
+
+            if (!rawDbData) {
                 res.status(404).json({ message: "Invoice data not found." });
                 return;
             }
 
-            const firstRecord = rawDbData[0] as any;
-            console.log("🔑 Keys received from DB:", Object.keys(firstRecord));
-
-            const rawSource = this.extractRawSource(firstRecord);
-
-            if (!rawSource) {
-                console.error("❌ Data structure mismatch. Record:", firstRecord);
-                res.status(500).json({
-                    message: "Database returned a record, but could not find JsonDetail or JSONOutput column.",
-                    availableKeys: Object.keys(firstRecord)
-                });
-                return;
-            }
-
-
             try {
-                const rawJsonObject = this.parseInvoiceSource(rawSource);
-
-                const finalResult = createParsedInvoice(rawJsonObject);
-                res.json(finalResult);
+                const invoiceArray = [rawDbData];
+                const finalResult = createParsedInvoice(invoiceArray, rawItemData);
+                const responseData = finalResult.detail;
+                res.json(responseData);
 
             } catch (parseError) {
-                console.error("JSON Parse Error:", parseError);
+                console.error(`JSON Parse Error for Invoice: ${invoiceCode}`, parseError);
                 res.status(500).json({
-                    message: "Failed to parse JSON string",
+                    message: "Failed to parse JSON content from database.",
                     error: parseError instanceof Error ? parseError.message : String(parseError)
                 });
             }
@@ -52,44 +45,6 @@ class InvoiceController {
                 error: error instanceof Error ? error.message : "An unknown error occurred"
             });
         }
-    }
-
-    private extractRawSource(record: any): any {
-        return record.JSONOutput
-    }
-
-    private parseInvoiceSource(source: any): any {
-        let jsonObject: any;
-
-        if (typeof source === 'object' && source !== null) {
-            const nestedString = source.JSONOutput || source.jsonOutput || source.jsonoutput;
-            if (nestedString) {
-                jsonObject = this.safeJsonParse(nestedString);
-            } else {
-                jsonObject = source;
-            }
-        }
-        else if (typeof source === 'string') {
-            jsonObject = this.safeJsonParse(source);
-        }
-        else {
-            throw new Error("Unknown data type for source column");
-        }
-
-        if (jsonObject && jsonObject.JSONOutput && typeof jsonObject.JSONOutput === 'string') {
-            return JSON.parse(jsonObject.JSONOutput);
-        }
-
-        return jsonObject;
-    }
-
-    private safeJsonParse(targetString: string): any {
-        if (!targetString) return {};
-        const trimmed = targetString.trim();
-        if (!trimmed.startsWith('{') && !trimmed.startsWith('[')) {
-            throw new Error("Data is not a valid JSON string");
-        }
-        return JSON.parse(targetString);
     }
 }
 

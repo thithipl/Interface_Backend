@@ -10,7 +10,8 @@ const config: Knex.Config = {
         user: process.env.DB_USER as string,
         password: process.env.DB_PASSWORD as string,
         database: process.env.DB_NAME as string,
-        options: { encrypt: false, enableArithAbort: true }
+        requestTimeout: 60000,
+        options: { encrypt: false, enableArithAbort: true },
     }
 };
 

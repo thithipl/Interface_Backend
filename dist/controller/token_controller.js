@@ -18,7 +18,6 @@ class TokenController {
         }
         catch (error) {
             console.error('Login error:', error.message);
-            // ✅ ปรับโครงสร้าง error ให้แสดงชัดเจนขึ้น
             res.status(500).json({
                 success: false,
                 message: error.response?.data?.message || error.message || 'Login failed',

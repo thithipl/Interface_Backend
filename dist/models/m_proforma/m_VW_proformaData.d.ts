@@ -1,10 +1,10 @@
 export interface ProformaData {
     proforma_Code: string | null;
-    inquity_code: string | null;
+    inquiry_code: string | null;
     Messrs: string | null;
     agent_code: string | null;
     consignee_id: string | null;
-    InvoiceOf: string | null;
+    invoice_of: string | null;
     Sailing_to: string | null;
     billingAddress: string | null;
     ship_to_port_name: string | null;
@@ -47,6 +47,7 @@ export interface ProformaData {
     nw: number | null;
     gw: number | null;
     cust_ref: string | null;
+    test: string | null;
 }
 export declare const ProformaDataModel: {
     getAll(): Promise<ProformaData[]>;

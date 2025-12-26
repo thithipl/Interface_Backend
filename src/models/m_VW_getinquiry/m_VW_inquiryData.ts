@@ -36,11 +36,13 @@ export interface InquiryData {
 export const InquiryDataModel = {
     async getINQData(): Promise<InquiryData[]> {
         return db<InquiryData>('Autoshop.dbo.VW_AS_getDataInquiry')
-            .select('*');
+            .select('*')
+            .orderBy('created_at', 'desc');
     },
     async getINQDataByINQCode(inqcode: string): Promise<InquiryData[]> {
         const result = await db<InquiryData>('Autoshop.dbo.VW_AS_getDataInquiry')
             .where("inquiry_code", inqcode)
+            .orderBy('created_at', 'desc')
             .select("*");
         return result;
     }
@@ -49,11 +51,13 @@ export const InquiryDataModel = {
 export const InquiryAllModel = {
     async getINQDataAll(): Promise<InquiryData[]> {
         return db<InquiryData>('Autoshop.dbo.VW_AS_getDataInquiryAll')
-        .select('*');
+            .select('*')
+            .orderBy('created_at', 'desc');
     },
     async getINQDataByINQCode(inqcode: string): Promise<InquiryData[]> {
         return db<InquiryData>('Autoshop.dbo.VW_AS_getDataInquiryAll')
             .where("inquiry_code", inqcode)
-            .select("*");
+            .select("*")
+            .orderBy('created_at', 'desc');
     }
 };

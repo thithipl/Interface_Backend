@@ -12,7 +12,8 @@ const config = {
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
-        options: { encrypt: false, enableArithAbort: true }
+        requestTimeout: 60000,
+        options: { encrypt: false, enableArithAbort: true },
     }
 };
 exports.default = config;

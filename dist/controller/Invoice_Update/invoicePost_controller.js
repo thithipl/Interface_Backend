@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostProforma = void 0;
-const proformaPost_service_1 = require("../../services/Proforma/proformaPost_service");
-const PostProforma = async (req, res) => {
+exports.updateInvoice = void 0;
+const invoicePost_service_1 = require("../../services/Invoice/invoicePost_service");
+const updateInvoice = async (req, res) => {
     try {
         const token = req.headers.authorization?.replace("Bearer ", "");
         if (!token) {
             return res.status(401).json({ message: "Missing Bearer Token" });
         }
         console.log("---------------------------------------------");
-        console.log("Controller Received Body:");
+        console.log("📥 Invoice Controller Received Body:");
         console.log(JSON.stringify(req.body, null, 2));
         console.log("---------------------------------------------");
         if (!req.body || Object.keys(req.body).length === 0) {
@@ -18,22 +18,21 @@ const PostProforma = async (req, res) => {
                 message: "Request Body is empty!"
             });
         }
-        const hasProformaCode = req.body.proforma_code || req.body.proforma_Code;
-        if (!hasProformaCode) {
-            console.warn("Warning: Body is missing 'proforma_code' or 'proforma_Code'");
-        }
         const data = req.body;
-        const result = await proformaPost_service_1.proformaPostService.postProforma(data, token);
-        console.log("✅ Service Result:", result);
+        console.log("🔄 Calling Invoice Service...");
+        const result = await invoicePost_service_1.invoiceDataPostService.PostInvoice(data, token);
+        console.log("✅ Invoice Service Result:", JSON.stringify(result));
         res.json(result);
     }
     catch (error) {
-        console.error("Controller Error:", error);
+        console.error("❌ Invoice Controller Error:", error.message);
         let statusCode = 500;
-        if (error.message.includes("422"))
-            statusCode = 422;
         if (error.message.includes("400"))
             statusCode = 400;
+        if (error.message.includes("401"))
+            statusCode = 401;
+        if (error.message.includes("422"))
+            statusCode = 422;
         if (error.message.includes("404"))
             statusCode = 404;
         res.status(statusCode).json({
@@ -42,5 +41,5 @@ const PostProforma = async (req, res) => {
         });
     }
 };
-exports.PostProforma = PostProforma;
-//# sourceMappingURL=proformaPost_controller.js.map
+exports.updateInvoice = updateInvoice;
+//# sourceMappingURL=invoicePost_controller.js.map

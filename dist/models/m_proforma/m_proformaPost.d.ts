@@ -1,7 +1,52 @@
-import { ProformaHdr } from "../m_proforma/m_VW_proformaHdr";
-import { ProformaDtl } from "../m_proforma/m_VW_proformaDtl";
 export interface ProformaModelPost {
-    header: ProformaHdr;
-    items: ProformaDtl[];
+    proforma_code: string;
+    inquiry_code: string;
+    agent_code: string;
+    consignee_id: string;
+    invoice_of: string;
+    sailling_to: string;
+    billing_address: string;
+    ship_to_port_name: string;
+    payment: string;
+    ourbank: string;
+    est_date: Date;
+    discount_persent: string;
+    discount: string;
+    fut40hq: string;
+    fut40: string;
+    fut20: string;
+    fright_fut40hq: string;
+    fright_fut40: string;
+    fright_fut20: string;
+    document_charge: string;
+    insurance_charge: string;
+    grand_total: string;
+    price_term: string;
+    currency_code: string;
+    payment_desc: string;
+    our_bank_desc: string;
+    remark: string;
+    items: ProformaItem[];
+}
+export interface ProformaItem {
+    product_code: string;
+    unit_price: string;
+    qty: string;
+    unit: string;
+    amount: string;
+    currency_code: string;
+    pack_ctn: string;
+    ctn_total: string;
+    m3: string;
+    m3_total: string;
+    nw: string;
+    gw: string;
+    cust_ref: string;
+    stock: string;
+    flag: string;
+    remark_customer: string;
+    remark_sales: string;
+    is_urgent: string;
+    status: string;
 }
 //# sourceMappingURL=m_proformaPost.d.ts.map

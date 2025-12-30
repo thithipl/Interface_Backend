@@ -1,8 +1,8 @@
-import express from "express";
-import { InvoiceDataPostController } from "../../controller/Invoice_Update/invoicePostData_controller";
+// import express from "express";
+// import { InvoiceDataPostController } from "../../controller/Invoice_Update/invoicePostData_controller";
 
-const router = express.Router();
+// const router = express.Router();
 
-router.post("/post", InvoiceDataPostController.PostInvoiceDataService);
+// router.post("/post", InvoiceDataPostController.PostInvoiceDataService);
 
-export default router;
+// export default router;

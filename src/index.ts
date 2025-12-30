@@ -14,7 +14,7 @@ import updatePFMRoutes from "./routes/Proforma/AS_updateDataPFM_Inquiry";
 import inquiryDtlByPFMNoRoutes from "./routes/inquiry/VW_inquiryDtlByPFMNo_routes";
 import proformaHdrRoutes from "./routes/Proforma/VW_proformaHdr_routes";
 import proformaDtlRoutes from "./routes/Proforma/VW_proformaDtl_routes";
-import invoiceRoutes from "./routes/invoice/invoice_routes";
+import invoiceRoutes from "./routes/invoice/invoicePost_routes";
 import tokenRoutes from "./routes/token_routes";
 import proformaPostRoutes from "./routes/Proforma/proformaPost_routes";
 import get_ProductItemRoutes from "./routes/Product_Item/get_ProductItem_routes";

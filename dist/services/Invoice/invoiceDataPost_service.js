@@ -1,10 +1,8 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.InvoiceDataPostService = void 0;
-class InvoiceDataPostService {
-    async PostInvoiceDataService(data) {
-        return data;
-    }
-}
-exports.InvoiceDataPostService = InvoiceDataPostService;
+// import type { InvoicModelPost } from "../../models/m_invoice/m_invoicesData";
+// export class InvoiceDataPostService {
+//     async PostInvoiceDataService(data: InvoicModelPost) {
+//         return data;
+//     }
+// }
 //# sourceMappingURL=invoiceDataPost_service.js.map

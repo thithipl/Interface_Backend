@@ -19,7 +19,7 @@ const AS_updateDataPFM_Inquiry_1 = __importDefault(require("./routes/Proforma/AS
 const VW_inquiryDtlByPFMNo_routes_1 = __importDefault(require("./routes/inquiry/VW_inquiryDtlByPFMNo_routes"));
 const VW_proformaHdr_routes_1 = __importDefault(require("./routes/Proforma/VW_proformaHdr_routes"));
 const VW_proformaDtl_routes_1 = __importDefault(require("./routes/Proforma/VW_proformaDtl_routes"));
-const invoice_routes_1 = __importDefault(require("./routes/invoice/invoice_routes"));
+const invoicePost_routes_1 = __importDefault(require("./routes/invoice/invoicePost_routes"));
 const token_routes_1 = __importDefault(require("./routes/token_routes"));
 const proformaPost_routes_1 = __importDefault(require("./routes/Proforma/proformaPost_routes"));
 const get_ProductItem_routes_1 = __importDefault(require("./routes/Product_Item/get_ProductItem_routes"));
@@ -46,7 +46,7 @@ app.use(`${API_PREFIX}/inquiryDtlByPFMNo`, VW_inquiryDtlByPFMNo_routes_1.default
 app.use(`${API_PREFIX}/PFMNo`, VW_inquiryDtlByPFMNo_routes_1.default);
 app.use(`${API_PREFIX}/proformaHdr`, VW_proformaHdr_routes_1.default);
 app.use(`${API_PREFIX}/proformaDtl`, VW_proformaDtl_routes_1.default);
-app.use(`${API_PREFIX}/invoice`, invoice_routes_1.default);
+app.use(`${API_PREFIX}/invoice`, invoicePost_routes_1.default);
 app.use(`${API_PREFIX}/login`, token_routes_1.default);
 app.use(`${API_PREFIX}/proforma`, proformaPost_routes_1.default);
 app.use(`${API_PREFIX}/getProductItem`, get_ProductItem_routes_1.default);

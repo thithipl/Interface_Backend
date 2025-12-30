@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { proformaPostService } from "../../services/Proforma/proformaPost_service";
-import { ProformaModelPost } from "../../models/m_proforma/m_proformaPost";
+import { invoiceDataPostService } from "../../services/Invoice/invoicePost_service";
+import { InvoiceModelPost } from "../../models/m_invoice/m_invoicePost";
 
-export const PostProforma = async (req: Request, res: Response) => {
+export const updateInvoice = async (req: Request, res: Response) => {
     try {
         const token = req.headers.authorization?.replace("Bearer ", "");
         if (!token) {
@@ -10,7 +10,7 @@ export const PostProforma = async (req: Request, res: Response) => {
         }
 
         console.log("---------------------------------------------");
-        console.log("Controller Received Body:");
+        console.log("📥 Invoice Controller Received Body:");
         console.log(JSON.stringify(req.body, null, 2));
         console.log("---------------------------------------------");
 
@@ -21,26 +21,23 @@ export const PostProforma = async (req: Request, res: Response) => {
             });
         }
 
-        const hasProformaCode = req.body.proforma_code || req.body.proforma_Code;
+        const data: InvoiceModelPost = req.body;
 
-        if (!hasProformaCode) {
-            console.warn("Warning: Body is missing 'proforma_code' or 'proforma_Code'");
-        }
+        console.log("🔄 Calling Invoice Service...");
 
-        const data: ProformaModelPost = req.body;
+        const result = await invoiceDataPostService.PostInvoice(data, token);
 
-        const result = await proformaPostService.postProforma(data, token);
-
-        console.log("✅ Service Result:", result);
+        console.log("✅ Invoice Service Result:", JSON.stringify(result));
 
         res.json(result);
 
     } catch (error: any) {
-        console.error("Controller Error:", error);
+        console.error("❌ Invoice Controller Error:", error.message);
 
         let statusCode = 500;
-        if (error.message.includes("422")) statusCode = 422;
         if (error.message.includes("400")) statusCode = 400;
+        if (error.message.includes("401")) statusCode = 401;
+        if (error.message.includes("422")) statusCode = 422;
         if (error.message.includes("404")) statusCode = 404;
 
         res.status(statusCode).json({
@@ -48,4 +45,4 @@ export const PostProforma = async (req: Request, res: Response) => {
             message: error.message || "Internal Server Error",
         });
     }
-}
+};

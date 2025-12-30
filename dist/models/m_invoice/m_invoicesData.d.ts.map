@@ -1,1 +1,1 @@
-{"version":3,"file":"m_invoicesData.d.ts","sourceRoot":"","sources":["../../../src/models/m_invoice/m_invoicesData.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,YAAY,EAAE,QAAQ,EAAE,IAAI,EAAE,KAAK,EAAE,MAAM,iBAAiB,CAAC;AAEtE,MAAM,WAAW,eAAe;IAC5B,IAAI,EAAE,YAAY,EAAE,CAAC;IACrB,QAAQ,EAAE,QAAQ,EAAE,CAAC;IACrB,KAAK,EAAE,IAAI,EAAE,CAAC;IACd,MAAM,EAAE,KAAK,EAAE,CAAC;CACnB"}
+{"version":3,"file":"m_invoicesData.d.ts","sourceRoot":"","sources":["../../../src/models/m_invoice/m_invoicesData.ts"],"names":[],"mappings":""}

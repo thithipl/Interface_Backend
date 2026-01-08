@@ -1,5 +1,5 @@
-import sql, { pool } from 'mssql';
-import dotenv, { config } from 'dotenv';
+import sql from 'mssql';
+import dotenv from 'dotenv';
 
 dotenv.config();
 

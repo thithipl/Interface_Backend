@@ -50,8 +50,10 @@ class InvoiceDataPostService {
                     gross_weight: s.gross_weight ? Number(s.gross_weight) : null,
                     measurement: s.measurement ? Number(s.measurement) : null,
                     country_of_origin: String(s.country_of_origin || ""),
-                    shipline: String(s.shipline || ""),
-                    status: String(s.status || "")
+                    shipline: String(s.shipline || "inprogress"),
+                    status: String(s.statuss || "inprogress")
+                    // status: String(s.statuss || "")
+                    // statuss: String(s.statuss || "")
                 })) : [],
                 items: Array.isArray(rawData.items) ? rawData.items.map(item => ({
                     proforma_code: String(item.proforma_code || ""),

@@ -41,7 +41,7 @@ export interface Shipping {
     measurement: number;
     country_of_origin: string;
     shipline: string;
-    status: string;
+    statuss: string;
 }
 export interface Item {
     proforma_code: string | null;

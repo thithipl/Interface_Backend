@@ -33,7 +33,7 @@ function createParsedInvoice(rawData, rawItemData) {
                 measurement: rawHeader.measurement ?? null,
                 country_of_origin: rawHeader.country_of_origin || '',
                 shipline: rawHeader.shipline || '',
-                status: rawHeader.statuss || '',
+                statuss: rawHeader.statuss || '',
             }] : [];
         const invoiceItem = (rawItemData || []).map((item) => ({
             proforma_code: item.proforma_code || null,
@@ -76,6 +76,7 @@ function createParsedInvoice(rawData, rawItemData) {
             InvoiceFrom: rawHeader.InvoiceFrom || null,
             InvoiceTo: rawHeader.InvoiceTo || null,
             invoicedate: rawHeader.invoicedate ? new Date(rawHeader.invoicedate) : new Date(),
+            pfmDate: rawHeader.pfmDate ? new Date(rawHeader.pfmDate) : new Date(),
             shipping: singleShipping,
             items: invoiceItem,
             claims: rawHeader.claim_code

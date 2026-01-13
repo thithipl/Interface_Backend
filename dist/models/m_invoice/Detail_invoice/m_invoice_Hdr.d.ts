@@ -22,6 +22,7 @@ export interface InvoiceHdrModel {
     InvoiceFrom: string | null;
     InvoiceTo: string | null;
     invoicedate: Date | null;
+    pfmDate: Date | null;
     shipping: ShippingModel[];
     items: InvoiceItemsModel[];
     claims: InvoicClaimCode[];
@@ -49,7 +50,7 @@ export interface ShippingModel {
     measurement: number | null;
     country_of_origin: string;
     shipline: string;
-    status: string;
+    statuss: string;
 }
 export interface ParsedInvoice {
     detail: InvoiceHdrModel[];

@@ -25,18 +25,28 @@ exports.detailInvoice_Hdr = {
             'status', 'Remarks', 'est_date', 'etd', 'eta', 'pop', 'from_port', 'to_port',
             'fut40hq', 'fut40', 'fut20', 'fut40_NOR', 'fut40_OT', 'fright_fut40hq',
             'document_charge', 'insurance_charge', 'net_weight', 'gross_weight', 'measurement',
-            'country_of_origin', 'shipline', 'statuss', 'claim_code', 'invoicedate', 'Address', 'InvoiceFrom', 'InvoiceTo',
+            'country_of_origin', 'shipline', 'statuss', 'claim_code', 'invoicedate', 'Address', 'InvoiceFrom', 'InvoiceTo', 'pfmDate'
         ];
-        // const invoice_columns = [
-        //     'invoice_code', 'proforma_code', 'agent_code', 'consignee_id', 'invoiceOf',
-        //     'payment', 'price_total', 'currency_code', 'price_item_total', 'discount', 'vat',
-        //     'grand_total', 'deposit', 'delivery_term', 'delivery_port_name', 'due_date',
-        //     'status', 'Remarks',
-        // ];
         query = query.where('invoice_code', 'LIKE', searchPattern);
         query = query.select(...invoice_columns);
-        const result = await query.first();
-        return result;
+        query = query.orderBy('pfmDate', 'desc');
+        const results = await query;
+        if (!results || results.length === 0) {
+            return undefined;
+        }
+        const isEmpty = (value) => {
+            return value === null || value === undefined || value === '';
+        };
+        const mergedResult = results.reduce((accumulator, currentItem) => {
+            Object.keys(accumulator).forEach((key) => {
+                if (isEmpty(accumulator[key]) && !isEmpty(currentItem[key])) {
+                    // @ts-ignore 
+                    accumulator[key] = currentItem[key];
+                }
+            });
+            return accumulator;
+        }, { ...results[0] });
+        return mergedResult;
     },
     async getInvoiceItems_Dtl(invoiceCode) {
         if (!invoiceCode) {

@@ -28,7 +28,12 @@ export interface ProformaHdr {
     our_bank_desc: string | null;
     remark: string | null;
 }
+export interface OnlyProforma {
+    proforma_Code: string | null;
+    salePerson: string | null;
+}
 export declare const ProformaHdrModel: {
     getProformaHdr(pfm_Code: string): Promise<ProformaHdr[]>;
+    getonlyProforma(): Promise<OnlyProforma[]>;
 };
 //# sourceMappingURL=m_VW_proformaHdr.d.ts.map

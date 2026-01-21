@@ -8,10 +8,6 @@ const PostProforma = async (req, res) => {
         if (!token) {
             return res.status(401).json({ message: "Missing Bearer Token" });
         }
-        console.log("---------------------------------------------");
-        console.log("Controller Received Body:");
-        console.log(JSON.stringify(req.body, null, 2));
-        console.log("---------------------------------------------");
         if (!req.body || Object.keys(req.body).length === 0) {
             return res.status(400).json({
                 success: false,
@@ -24,7 +20,6 @@ const PostProforma = async (req, res) => {
         }
         const data = req.body;
         const result = await proformaPost_service_1.proformaPostService.postProforma(data, token);
-        console.log("✅ Service Result:", result);
         res.json(result);
     }
     catch (error) {

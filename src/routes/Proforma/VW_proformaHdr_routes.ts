@@ -3,6 +3,8 @@ import { ProformaHdrController } from "../../controller/Proforma_Data/VW_proform
 
 const router = Router();
 
+router.get("/onlyProforma", ProformaHdrController.getOnlyProforma);
 router.get("/:pfmcode", ProformaHdrController.getProformaHdrItem);
+
 
 export default router;

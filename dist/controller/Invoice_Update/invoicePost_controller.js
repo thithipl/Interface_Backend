@@ -8,10 +8,6 @@ const updateInvoice = async (req, res) => {
         if (!token) {
             return res.status(401).json({ message: "Missing Bearer Token" });
         }
-        console.log("---------------------------------------------");
-        console.log("📥 Invoice Controller Received Body:");
-        console.log(JSON.stringify(req.body, null, 2));
-        console.log("---------------------------------------------");
         if (!req.body || Object.keys(req.body).length === 0) {
             return res.status(400).json({
                 success: false,
@@ -19,9 +15,7 @@ const updateInvoice = async (req, res) => {
             });
         }
         const data = req.body;
-        console.log("🔄 Calling Invoice Service...");
         const result = await invoicePost_service_1.invoiceDataPostService.PostInvoice(data, token);
-        console.log("✅ Invoice Service Result:", JSON.stringify(result));
         res.json(result);
     }
     catch (error) {

@@ -33,7 +33,7 @@ export const InquiryModel = {
       const num2 = Number(result2?.count ?? 0);
 
       console.log("--- Debug Update ---");
-      console.log("Param inquiryCode:", `"${inquiryCode}"`); // ดูว่ามีช่องว่างไหม
+      console.log("Param inquiryCode:", `"${inquiryCode}"`);
 
       if (num > 0) {
         if (num2 > 0) {

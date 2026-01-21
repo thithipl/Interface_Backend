@@ -11,7 +11,6 @@ export class ProformaPostService {
             const hdr: any = rawData;
             const dtl: any[] = Array.isArray(rawData.items) ? rawData.items : [];
 
-
             const payload = {
                 proforma_code: String(hdr.proforma_code || hdr.proforma_Code || "").trim(),
                 inquiry_code: String(hdr.inquiry_code || "").trim(),
@@ -94,12 +93,8 @@ export class ProformaPostService {
         } catch (error: any) {
             console.error(" ProformaPostService Error:", error.message);
             if (axios.isAxiosError(error) && error.response) {
-                console.log("---------------------------------------------------");
-                console.log(" External API Response (Error):");
                 console.log("Status Code:", error.response.status);
                 console.log("Body:", JSON.stringify(error.response.data, null, 2));
-                console.log("---------------------------------------------------");
-
                 const remoteMsg = error.response.data?.message || JSON.stringify(error.response.data);
                 throw new Error(`External API Error (${error.response.status}): ${remoteMsg}`);
             }

@@ -11,6 +11,11 @@ exports.ProformaHdrModel = {
             .where('proforma_Code', pfm_Code)
             .select('*');
         return result;
+    },
+    async getonlyProforma() {
+        return await (0, index_1.default)('Autoshop.dbo.VW_AS_getProformaHdr')
+            .select('proforma_Code', 'salesperson')
+            .orderBy('proforma_Code', 'desc');
     }
 };
 //# sourceMappingURL=m_VW_proformaHdr.js.map

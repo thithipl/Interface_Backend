@@ -86,11 +86,8 @@ class ProformaPostService {
         catch (error) {
             console.error(" ProformaPostService Error:", error.message);
             if (axios_1.default.isAxiosError(error) && error.response) {
-                console.log("---------------------------------------------------");
-                console.log(" External API Response (Error):");
                 console.log("Status Code:", error.response.status);
                 console.log("Body:", JSON.stringify(error.response.data, null, 2));
-                console.log("---------------------------------------------------");
                 const remoteMsg = error.response.data?.message || JSON.stringify(error.response.data);
                 throw new Error(`External API Error (${error.response.status}): ${remoteMsg}`);
             }

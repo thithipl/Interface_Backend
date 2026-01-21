@@ -13,6 +13,15 @@ exports.ProformaHdrController = {
         catch (error) {
             res.status(500).json({ message: "Internal server error", error });
         }
+    },
+    async getOnlyProforma(req, res) {
+        try {
+            const data = await service.getOnlyProforma();
+            res.status(200).json(data);
+        }
+        catch (error) {
+            res.status(500).json({ message: "Internal server error", error });
+        }
     }
 };
 //# sourceMappingURL=VW_proformaHdr_controller.js.map

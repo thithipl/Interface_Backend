@@ -20,6 +20,7 @@ import proformaPostRoutes from "./routes/Proforma/proformaPost_routes";
 import get_ProductItemRoutes from "./routes/Product_Item/get_ProductItem_routes";
 import getInvoiceRoutes from "./routes/invoice/invoiceOnly_routes";
 import invoiceJsonRoutes from "./routes/invoice/invoiceJson_routes";
+import saleLogin from "./routes/SaleLogin/saleLogin_routes"
 
 
 dotenv.config();
@@ -52,8 +53,7 @@ app.use(`${API_PREFIX}/proforma`, proformaPostRoutes);
 app.use(`${API_PREFIX}/getProductItem`, get_ProductItemRoutes);
 app.use(`${API_PREFIX}/invoiceOnly`, getInvoiceRoutes);
 app.use(`${API_PREFIX}/invoiceJson`, invoiceJsonRoutes);
-
-
+app.use(`${API_PREFIX}`, saleLogin);
 
 app.use("/test", (req, res) => {
     console.log("Test route is working");

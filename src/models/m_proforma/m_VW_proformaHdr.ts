@@ -31,11 +31,22 @@ export interface ProformaHdr {
     remark: string | null;
 }
 
+export interface OnlyProforma {
+    proforma_Code: string | null;
+    salePerson: string | null;
+}
+
 export const ProformaHdrModel = {
     async getProformaHdr(pfm_Code: string): Promise<ProformaHdr[]> {
         const result = await db<ProformaHdr>('Autoshop.dbo.VW_AS_getProformaHdr')
             .where('proforma_Code', pfm_Code)
             .select('*');
         return result;
+    },
+
+    async getonlyProforma(): Promise<OnlyProforma[]> {
+        return await db<OnlyProforma>('Autoshop.dbo.VW_AS_getProformaHdr')
+            .select('proforma_Code', 'salesperson')
+            .orderBy('proforma_Code', 'desc');
     }
-}
+};

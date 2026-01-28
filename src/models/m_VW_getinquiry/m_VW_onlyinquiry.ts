@@ -14,7 +14,7 @@ export const OnlyInquiryModel = {
                 'inquiry_code',
                 'PFM_No'
             )
-            .orderBy('inquiry_code', 'desc');
+            .orderBy('created_at', 'desc');
         return rows;
     },
 };

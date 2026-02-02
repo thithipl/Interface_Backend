@@ -28,7 +28,8 @@ export class SaleUserModel {
             .andWhere('IsActive', 1)
             .andWhere(builder => {
                 builder.whereRaw("LTRIM(RTRIM(emp_id)) LIKE ?", ['%SAL%'])
-                    .orWhere('user_name', 'THITHANAWAT');
+                    .orWhere('user_name', 'THITHANAWAT')
+                    .orWhere('user_name', 'SOMPOL');
             })
             .first();
     }

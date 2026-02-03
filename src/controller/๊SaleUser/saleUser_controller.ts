@@ -19,14 +19,23 @@ export const saleUserController = {
             if (username === 'admin' && password === 'admin1234') {
 
                 const secret = process.env.JWT_SECRET || 'secret_fallback_dev_only';
+
+                const adminPayload = {
+                    user_name: 'Admin',
+                    username: 'Admin User',
+                    emp_id: 'Administrator007',
+                    fullname: 'Admin User',
+                    nameEng: 'Admin User',
+                    name_thai: 'Admin User',
+                    name_eng: 'Admin User',
+                    deptCode: 'IT',
+                    departmentcode: 'IT',
+                    dept: 'Admin',
+                    department: 'Admin'
+                };
+
                 const testToken = jwt.sign(
-                    {
-                        user_name: 'Admin',
-                        emp_id: 'Admin001',
-                        name_thai: 'Admin User',
-                        name_eng: 'Admin User',
-                        departmentcode: 'IT'
-                    },
+                    adminPayload,
                     secret,
                     { expiresIn: '1d' }
                 );
@@ -35,14 +44,7 @@ export const saleUserController = {
                     success: true,
                     message: "เข้าสู่ระบบสำเร็จ (Test Mode)",
                     token: testToken,
-                    user: {
-                        user_name: 'Admin',
-                        emp_id: 'Admin001',
-                        name_thai: 'Admin User',
-                        name_eng: 'Admin User',
-                        departmentcode: 'IT',
-                        department: 'Admin'
-                    }
+                    user: adminPayload
                 });
             }
 

@@ -16,11 +16,10 @@ exports.emptyInvoice = {
             const searchPattern = `%${invoiceCode}%`;
             query = query.where('InvoiceCode', 'LIKE', searchPattern);
         }
-        if (!invoiceCode) {
-            query = query
-                .limit(100);
-        }
-        query = query.orderBy('created_at', 'desc').select('*');
+        query = query
+            .orderBy('created_at', 'desc')
+            .limit(100)
+            .select('*');
         const result = await query;
         return result;
     },

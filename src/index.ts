@@ -56,7 +56,7 @@ app.use(`${API_PREFIX}/invoiceJson`, invoiceJsonRoutes);
 app.use(`${API_PREFIX}`, saleLogin);
 
 app.use("/test", (req, res) => {
-    console.log("Test route is working");
+    console.log("Test route is working V.2");
     res.send(`Test route is working`);
 });
 

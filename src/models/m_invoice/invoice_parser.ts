@@ -41,24 +41,32 @@ export function createParsedInvoice(rawData: any[] | null, rawItemData: any[] | 
             statuss: rawHeader.statuss || '',
         }] : [];
 
-        const invoiceItem: InvoiceItemsModel[] = (rawItemData || []).map((item: any) => ({
-            proforma_code: item.proforma_code || null,
-            product_code: item.product_code || null,
-            unit_price: item.unit_price ?? null,
-            qty: item.qty ?? null,
-            unit: item.unit ?? null,
-            amount: item.amount ?? null,
-            pack_ctn: item.pack_ctn ?? null,
-            ctn_total: item.ctn_total ?? null,
-            m3: item.m3 ?? null,
-            m3_total: item.m3_total ?? null,
-            nw: item.nw ?? null,
-            gw: item.gw ?? null,
-            remark_customer: item.remark_customer || null,
-            remark_sales: item.remark_sales || null,
-            OurCode: item.OurCode || null,
-            Description: item.Description || null
-        }));
+        
+        let lastProformaCode: string | null = null;
+        const invoiceItem: InvoiceItemsModel[] = (rawItemData || []).map((item: any) => {
+            if (item.proforma_code) {
+                lastProformaCode = item.proforma_code;
+            }
+
+            return {
+                proforma_code: lastProformaCode,
+                product_code: item.product_code || null,
+                unit_price: item.unit_price ?? null,
+                qty: item.qty ?? null,
+                unit: item.unit ?? null,
+                amount: item.amount ?? null,
+                pack_ctn: item.pack_ctn ?? null,
+                ctn_total: item.ctn_total ?? null,
+                m3: item.m3 ?? null,
+                m3_total: item.m3_total ?? null,
+                nw: item.nw ?? null,
+                gw: item.gw ?? null,
+                remark_customer: item.remark_customer || null,
+                remark_sales: item.remark_sales || null,
+                OurCode: item.OurCode || null,
+                Description: item.Description || null
+            };
+        });
 
         const invoiceHdr: InvoiceHdrModel = {
             invoice_code: rawHeader.invoice_code || '',
